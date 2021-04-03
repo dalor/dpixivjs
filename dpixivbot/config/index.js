@@ -12,6 +12,6 @@ module.exports = {
         count: 5
     },
     DEFAULT_SESSION: process.env.DEFAULT_SESSION,
-    REDIS_URL: process.env.REDIS_URL,
+    REDIS_URL: process.env.REDISCLOUD_URL,
     SITE_URL: process.env.SITE_URL
 }
