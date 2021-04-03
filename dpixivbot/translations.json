@@ -1,0 +1,165 @@
+{
+    "choose_lang": {
+        "en": "Choose language",
+        "ru": "Выберите язык"
+    },
+    "already_choosed": {
+        "en": "Already choosed",
+        "ru": "Уже выбран"
+    },
+    "prev": {
+        "en": "◀️",
+        "ru": "◀️"
+    },
+    "next": {
+        "en": "▶️",
+        "ru": "▶️"
+    },
+    "source": {
+        "en": "Source",
+        "ru": "Источник"
+    },
+    "download_as_file": {
+        "en": "⬇️ file",
+        "ru": "⬇️ файл"
+    },
+    "share": {
+        "en": "Share",
+        "ru": "Поделиться"
+    },
+    "hide": {
+        "en": "🔼",
+        "ru": "🔼"
+    },
+    "with_description": {
+        "en": "📰 With description",
+        "ru": "📰 С описанием"
+    },
+    "without_description": {
+        "en": "🖼 Without description",
+        "ru": "🖼 Без описания"
+    },
+    "in_group": {
+        "en": "📂 In group",
+        "ru": "📂 В группе"
+    },
+    "by_one": {
+        "en": "📄 By one",
+        "ru": "📄 По одному"
+    },
+    "back_btn": {
+        "en": "<",
+        "ru": "<"
+    },
+    "minus": {
+        "en": "➖",
+        "ru": "➖"
+    },
+    "plus": {
+        "en": "➕",
+        "ru": "➕"
+    },
+    "loading...": {
+        "en": "Loading...",
+        "ru": "Загрузка..."
+    },
+    "settings_text": {
+        "en": "Choose your default settings and press <b>SAVE</b>",
+        "ru": "Настрой базовую конфигурацию и нажми <b>СОХРАНИТЬ</b>"
+    },
+    "save": {
+        "en": "SAVE",
+        "ru": "СОХРАНИТЬ"
+    },
+    "similar_count": {
+        "en": "Similar count:",
+        "ru": "Количество похожих:"
+    },
+    "saved": {
+        "en": "Saved",
+        "ru": "Сохранено"
+    },
+    "shown": {
+        "en": "Shown",
+        "ru": "Открыто"
+    },
+    "hidden": {
+        "en": "Hidden",
+        "ru": "Скрыто"
+    },
+    "similar_menu": {
+        "en": "Similar menu",
+        "ru": "Меню похожих"
+    },
+    "sender_menu": {
+        "en": "Sender menu",
+        "ru": "Меню автоотправщика"
+    },
+    "to_main": {
+        "en": "To main",
+        "ru": "На главную"
+    },
+    "with_description_alert": {
+        "en": "With description",
+        "ru": "С описанием"
+    },
+    "without_description_alert": {
+        "en": "Without description",
+        "ru": "Без описания"
+    },
+    "in_group_alert": {
+        "en": "In group",
+        "ru": "В паке"
+    },
+    "by_one_alert": {
+        "en": "By one",
+        "ru": "По одной"
+    },
+    "no_more": {
+        "en": "No more",
+        "ru": "Не более"
+    },
+    "no_less": {
+        "en": "No less",
+        "ru": "Не менее"
+    },
+    "error_occurred": {
+        "en": "Error occurred",
+        "ru": "Произошла ошибка"
+    },
+    "no_more_similar": {
+        "en": "No more similar",
+        "ru": "Больше нет похожих"
+    },
+    "sending_similar": {
+        "en": "Sending similar",
+        "ru": "Отправка похожих"
+    },
+    "added_channel": {
+        "en": "Added channel",
+        "ru": "Добавлен канал"
+    },
+    "updated_channel": {
+        "en": "Updated channel",
+        "ru": "Обновлен канал"
+    },
+    "more": {
+        "en": "More",
+        "ru": "Больше"
+    },
+    "was_sent": {
+        "en": "Was sent",
+        "ru": "Было отправлено"
+    },
+    "preload": {
+        "en": "Preload",
+        "ru": "Предзагрузка"
+    },
+    "cant_send_to_channel": {
+        "en": "Can`t send to channel. It will be removed",
+        "ru": "Не могу загрузить в канал. Он будет удален"
+    },"full": {
+        "en": "Full",
+        "ru": "Все"
+    }
+}

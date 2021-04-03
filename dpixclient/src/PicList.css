@@ -1,0 +1,61 @@
+.pic-list {
+    padding-top: 30px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.pic-title a{
+    text-decoration: none;
+    color: #000000;
+}
+
+.small-pic {
+    position: relative;
+    min-width: 300px;
+    min-height: 300px;
+    border: 1px solid #95939373;
+    margin: 10px;
+    max-width: 90%;
+}
+
+.small-pic img {
+    max-width: 100%;
+}
+
+.small-page-count {
+    position: absolute;
+    padding: 8px 10px;
+    font-size: 20px;
+    color: #ffffff;
+    border-radius: 0 20% 50% 0;
+    background: #95939373;
+}
+
+.show-more {
+    width: 200px;
+    background: #1782ddd1;
+    font-size: 20px;
+    padding: 10px 20px;
+    text-align: center;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 20px auto;
+}
+
+.only-one {
+    flex: 0 1 100%;
+    border: none;
+}
+
+.more-button {
+    position: absolute;
+    background: url("./img/add.png") no-repeat;
+    width: 64px;
+    height: 64px;
+    right: 5px;
+    bottom: 5px;
+    z-index: 3;
+}

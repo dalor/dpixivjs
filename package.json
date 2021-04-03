@@ -1,0 +1,28 @@
+{
+  "name": "dpixivjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "api.js",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "fastify": "^3.8.0",
+    "fastify-cors": "^4.1.0",
+    "fastify-static": "^3.3.0",
+    "fastify-telegraf": "^1.0.2",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^4.0.0",
+    "telegraf": "^3.38.0",
+    "telegraf-session-redis": "^5.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon -r dotenv/config index.js",
+    "client": "cd dpixclient && react-scripts start",
+    "build": "cd dpixclient && react-scripts build"
+  },
+  "author": "",
+  "license": "ISC"
+}
