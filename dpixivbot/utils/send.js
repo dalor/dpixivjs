@@ -19,15 +19,16 @@ exports.sendOneToChannel = (ctx, channelId, data) => info({ id: data.id }).then(
     return ctx.telegram.sendPhoto(channelId, photo, { reply_markup })
 })
 
-exports.sendFull = (ctx, id, data) => info({ id }).then((pic) => {
+exports.sendFull = (ctx, id, data) => info({ id }).then(async (pic) => {
     const picsCtx = (new Array(pic.pageCount)).fill().map((_, i) => picCtx(ctx, pic, i, true, true))
-    return Promise.all(splitToPacks(picsCtx, 10).map((pics) =>
-        ctx.replyWithMediaGroup(pics.map((pic, i) => ({
+    for (const pics of splitToPacks(picsCtx, 10)) {
+        await ctx.replyWithMediaGroup(pics.map((pic, i) => ({
             type: 'photo',
             media: pic.photo,
             caption: data && !data.description || i ? undefined : pic.caption,
             parse_mode: "HTML"
-        })), { reply_to_message_id: data && data.reply })))
+        })), { reply_to_message_id: data && data.reply })
+    }
 })
 
 const picCtx = (ctx, pic, page, no_reply_markup, no_page) => newPic({
