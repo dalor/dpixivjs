@@ -2,7 +2,7 @@ const fixChars = (str) => str.replace('<', '&#60;').replace('>', '&#62;')
 
 exports.fixChars = fixChars
 
-const changePage = (url, page) => url.replace(/\_p[0-9]+/, `_p${page}`)
+const changePage = (url, page) => url?.replace(/\_p[0-9]+/, `_p${page}`)
 
 exports.changePage = changePage
 
