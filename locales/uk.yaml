@@ -1,0 +1,43 @@
+back_btn: <
+added_channel: 'Додано канал <b>${channel}</b>'
+already_choosed: Вже обрано
+by_one: "\U0001F4C4 По одному"
+by_one_alert: По одній
+cant_send_to_channel: 'Не можу заванатажити до каналу ${channel}. Він буде видалений'
+choose_lang: Виберіть мову
+download_as_file: ⬇️ файл
+error_occurred: Виникла помилка
+full: Все
+hidden: Сховано
+hide: "\U0001F53C"
+in_group: "\U0001F4C2 В групі"
+in_group_alert: В пачці
+loading...: Завантаження...
+minus: ➖
+more: Більше
+next: ▶️
+no_less: Не менше
+no_more: Не більше
+no_more_similar: Нема більше схожих
+plus: ➕
+preload: Предзавантаження
+prev: ◀️
+save: ЗБЕРЕГТИ
+saved: Збережено
+sender_menu: Меню відправника
+sending_similar: Надіслати схожі
+settings_text: Налаштуй базову конфігурацію та натисни <b>ЗБЕРЕГТИ</b>
+share: Поділитись
+shown: Відкрито
+similar_count: Кількість схожих
+similar_menu: Меню схожих
+source: Джерело
+to_main: На головну
+updated_channel: 'Оновлено канал <b>${channel}</b>'
+was_sent: 'Було надіслано в ${channel}'
+with_description: "\U0001F4F0 С описом"
+with_description_alert: С описом
+without_description: "\U0001F5BC Без опису"
+without_description_alert: Без опису
+saucenao_error: Не була розпізнана. Спробуй пізніше
+low_simularity: Мала відповідність

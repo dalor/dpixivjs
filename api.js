@@ -4,7 +4,6 @@ const DEFAULT_METHOD = "GET";
 const DEFAULT_HOSTNAME = "www.pixiv.net";
 
 const https = require("https");
-const loadUrl = require("url").parse;
 const querystring = require("querystring");
 
 const requestOptions = (options) => {

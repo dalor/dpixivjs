@@ -1,0 +1,43 @@
+choose_lang: Choose language
+already_choosed: Already choosed
+prev: ◀️
+next: ▶️
+source: Source
+download_as_file: ⬇️ file
+share: Share
+hide: "\U0001F53C"
+with_description: "\U0001F4F0 With description"
+without_description: "\U0001F5BC Without description"
+in_group: "\U0001F4C2 In group"
+by_one: "\U0001F4C4 By one"
+back_btn: <
+minus: ➖
+plus: ➕
+loading...: Loading...
+settings_text: Choose your default settings and press <b>SAVE</b>
+save: SAVE
+similar_count: 'Similar count:'
+saved: Saved
+shown: Shown
+hidden: Hidden
+similar_menu: Similar menu
+sender_menu: Sender menu
+to_main: To main
+with_description_alert: With description
+without_description_alert: Without description
+in_group_alert: In group
+by_one_alert: By one
+no_more: No more
+no_less: No less
+error_occurred: Error occurred
+no_more_similar: No more similar
+sending_similar: Sending similar
+added_channel: 'Added channel <b>${channel}</b>'
+updated_channel: 'Updated channel <b>${channel}</b>'
+more: More
+was_sent: 'Was sent to ${channel}'
+preload: Preload
+cant_send_to_channel: 'Can`t send to channel ${channel}. It will be removed'
+full: Full
+saucenao_error: Not recognized. Try later
+low_simularity: Low simularity

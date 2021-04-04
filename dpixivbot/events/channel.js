@@ -1,6 +1,7 @@
 const { loadData } = require("../utils/data")
 const { sendOneToChannel } = require("../utils/send")
 const update = require("../utils/update")
+const { Extra } = require('telegraf');
 
 module.exports = ({ bot }) => {
 
@@ -22,7 +23,7 @@ module.exports = ({ bot }) => {
         if (forward_from && forward_from.type == 'channel') {
             return bot.telegram.getChatAdministrators(forward_from.id).then((data) => {
                 const user = findUser(data, ctx.from.id)
-                if ((user.can_post_messages || user.status == 'creator') && findUser(data, ctx.botInfo.id).can_post_messages) {
+                if ((user.can_post_messages || user.status == 'creator') && findUser(data, ctx.botInfo.id)?.can_post_messages) {
                     if (!ctx.session.channels) ctx.session.channels = []
                     const channel = findChannel(ctx.session.channels, forward_from.id)
                     if (!channel) {
@@ -30,10 +31,10 @@ module.exports = ({ bot }) => {
                             id: forward_from.id,
                             title: forward_from.title
                         })
-                        return ctx.reply(ctx.t('added_channel'))
-                    } else if (channel.title != forward_from.title) {
+                        return ctx.reply(ctx.t('added_channel', { channel: forward_from.title }), Extra.HTML())
+                    } else if (channel.title !== forward_from.title) {
                         channel.title = forward_from.title
-                        return ctx.reply(ctx.t('updated_channel'))
+                        return ctx.reply(ctx.t('updated_channel', { channel: channel.title }), Extra.HTML())
                     }
                 }
             }).catch(() => next())
@@ -45,9 +46,9 @@ module.exports = ({ bot }) => {
         const channel = findChannel(ctx.session.channels, ctx.match.groups.channelId)
         if (channel) {
             return sendOneToChannel(ctx, channel.id, data).then(() =>
-                ctx.answerCbQuery(ctx.t('was_sent'))).catch(() => {
+                ctx.answerCbQuery(ctx.t('was_sent', { channel: channel.title }))).catch((e) => {
                     ctx.session.channels = ctx.session.channels.filter((ch) => ch.id !== channel.id)
-                    return update(ctx, data).then(() => ctx.answerCbQuery(ctx.t('cant_send_to_channel')))
+                    return update(ctx, data).then(() => ctx.answerCbQuery(ctx.t('cant_send_to_channel', { channel: channel.title })))
                 })
         }
     }))

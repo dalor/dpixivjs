@@ -2,8 +2,6 @@ const fastify = require("fastify")({
     logger: true
 });
 
-const telegrafPlugin = require('fastify-telegraf');
-
 const bot = require('./dpixivbot')
 
 fastify.post('/' + bot.token, async request => {

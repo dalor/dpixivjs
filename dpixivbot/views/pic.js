@@ -24,7 +24,7 @@ exports.newPic = ({ pic, data, ctx, no_reply_markup, no_page }) => {
 
 exports.channelPic = ({ pic, data, ctx }) => {
     return {
-        photo: data.page > 0 ? changePage(pic.urls.medium, data.page) : pic.urls.medium,
+        photo: data.page > 0 ? changePage(pic.urls.regular, data.page) : pic.urls.regular,
         reply_markup: Telegraf.Extra.markup((markup) => markup.inlineKeyboard([
             [
                 markup.urlButton(ctx.t('source'), PIXIV_PIC_URL + data.id),

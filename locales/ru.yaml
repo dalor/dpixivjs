@@ -1,0 +1,43 @@
+choose_lang: Выбери язык
+already_choosed: Уже выбран
+prev: ◀️
+next: ▶️
+source: Источник
+download_as_file: ⬇️ файл
+share: Поделиться
+hide: "\U0001F53C"
+with_description: "\U0001F4F0 С описанием"
+without_description: "\U0001F5BC Без описания"
+in_group: "\U0001F4C2 В группе"
+by_one: "\U0001F4C4 По одному"
+back_btn: <
+minus: ➖
+plus: ➕
+loading...: Загрузка...
+settings_text: Настрой базовую конфигурацию и нажми <b>СОХРАНИТЬ</b>
+save: СОХРАНИТЬ
+similar_count: 'Количество похожих:'
+saved: Сохранено
+shown: Открыто
+hidden: Скрыто
+similar_menu: Меню похожих
+sender_menu: Меню автоотправщика
+to_main: На главную
+with_description_alert: С описанием
+without_description_alert: Без описания
+in_group_alert: В паке
+by_one_alert: По одной
+no_more: Не более
+no_less: Не менее
+error_occurred: Произошла ошибка
+no_more_similar: Больше нет похожих
+sending_similar: Отправка похожих
+added_channel: 'Добавлен канал <b>${channel}</b>'
+updated_channel: 'Обновлен канал <b>${channel}</b>'
+more: Больше
+was_sent: 'Было отправлено в ${channel}'
+preload: Предзагрузка
+cant_send_to_channel: 'Не могу загрузить в канал ${channel}. Он будет удален'
+full: Все
+saucenao_error: Не была опознана. Попробуй позже
+low_simularity: Малая схожесть
