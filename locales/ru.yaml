@@ -35,9 +35,10 @@ sending_similar: Отправка похожих
 added_channel: 'Добавлен канал <b>${channel}</b>'
 updated_channel: 'Обновлен канал <b>${channel}</b>'
 more: Больше
-was_sent: 'Было отправлено в ${channel}'
+was_sent: Было отправлено
 preload: Предзагрузка
 cant_send_to_channel: 'Не могу загрузить в канал ${channel}. Он будет удален'
 full: Все
 saucenao_error: Не была опознана. Попробуй позже
 low_simularity: Малая схожесть
+was_sent_to_channel: 'Было отправлено в ${channel}'

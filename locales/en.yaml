@@ -35,9 +35,10 @@ sending_similar: Sending similar
 added_channel: 'Added channel <b>${channel}</b>'
 updated_channel: 'Updated channel <b>${channel}</b>'
 more: More
-was_sent: 'Was sent to ${channel}'
+was_sent: Was sent
 preload: Preload
 cant_send_to_channel: 'Can`t send to channel ${channel}. It will be removed'
 full: Full
 saucenao_error: Not recognized. Try later
 low_simularity: Low simularity
+was_sent_to_channel: 'Was sent to ${channel}'

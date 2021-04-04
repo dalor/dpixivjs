@@ -34,10 +34,11 @@ similar_menu: Меню схожих
 source: Джерело
 to_main: На головну
 updated_channel: 'Оновлено канал <b>${channel}</b>'
-was_sent: 'Було надіслано в ${channel}'
+was_sent: Було надіслано
 with_description: "\U0001F4F0 С описом"
 with_description_alert: С описом
 without_description: "\U0001F5BC Без опису"
 without_description_alert: Без опису
 saucenao_error: Не була розпізнана. Спробуй пізніше
 low_simularity: Мала відповідність
+was_sent_to_channel: 'Було надіслано в ${channel}'

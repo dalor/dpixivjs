@@ -46,7 +46,7 @@ module.exports = ({ bot }) => {
         const channel = findChannel(ctx.session.channels, ctx.match.groups.channelId)
         if (channel) {
             return sendOneToChannel(ctx, channel.id, data).then(() =>
-                ctx.answerCbQuery(ctx.t('was_sent', { channel: channel.title }))).catch((e) => {
+                ctx.answerCbQuery(ctx.t('was_sent_to_channel', { channel: channel.title }))).catch((e) => {
                     ctx.session.channels = ctx.session.channels.filter((ch) => ch.id !== channel.id)
                     return update(ctx, data).then(() => ctx.answerCbQuery(ctx.t('cant_send_to_channel', { channel: channel.title })))
                 })
