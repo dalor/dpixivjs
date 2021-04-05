@@ -2,8 +2,8 @@ const { info, shortGroupInfo } = require("../../api")
 const { newPic, channelPic } = require("../views/pic")
 const { DEFAULT_CONFIG, DEFAULT_SESSION, PACK_SIZE } = require("../config")
 
-exports.sendPic = (ctx, id, page) => info({ id }).then((pic) => {
-    return sendOne(ctx, pic, page)
+exports.sendPic = (ctx, id, page, data) => info({ id }).then((pic) => {
+    return sendOne(ctx, pic, page, data)
 })
 
 exports.sendPics = (ctx, ids, data) =>
@@ -22,12 +22,16 @@ exports.sendOneToChannel = (ctx, channelId, data) => info({ id: data.id }).then(
 exports.sendFull = (ctx, id, data) => info({ id }).then(async (pic) => {
     const picsCtx = (new Array(pic.pageCount)).fill().map((_, i) => picCtx(ctx, pic, i, true, true))
     for (const pics of splitToPacks(picsCtx, 10)) {
-        await ctx.replyWithMediaGroup(pics.map((pic, i) => ({
-            type: 'photo',
-            media: pic.photo,
-            caption: data && !data.description || i ? undefined : pic.caption,
-            parse_mode: "HTML"
-        })), { reply_to_message_id: data && data.reply })
+        try {
+            await ctx.replyWithMediaGroup(pics.map((pic, i) => ({
+                type: 'photo',
+                media: pic.photo,
+                caption: data && !data.description || i ? undefined : pic.caption,
+                parse_mode: "HTML"
+            })), { reply_to_message_id: data && data.reply })
+        } catch {
+
+        }
     }
 })
 
@@ -50,9 +54,9 @@ const picCtx = (ctx, pic, page, no_reply_markup, no_page) => newPic({
 const sendOne = (ctx, pic, page, data) => {
     const { photo, caption, reply_markup } = picCtx(ctx, pic, page)
     return ctx.replyWithPhoto(photo, {
-        caption: data && !data.description ? undefined : caption,
-        reply_markup: data && !data.description ? undefined : reply_markup,
-        reply_to_message_id: data && data.reply,
+        caption: data?.description ? caption : undefined,
+        reply_markup: data?.description ? reply_markup : undefined,
+        reply_to_message_id: data?.reply,
         parse_mode: "HTML"
     })
 }

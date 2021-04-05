@@ -4,19 +4,19 @@ const saucenao = require("../utils/saucenao")
 
 module.exports = ({ bot, config }) => {
 
-    const sendPicFromUrl = (ctx) => sendPic(ctx, ctx.match.groups.picId, 0)
+    const sendPicFromUrl = (ctx) => sendPic(ctx, ctx.match.groups.picId, 0, { description: true })
 
     bot.hears(/https?\:\/\/www\.pixiv\.net\/en\/artworks\/(?<picId>[0-9]+)/, sendPicFromUrl)
 
     bot.hears(/https\:\/\/www\.pixiv\.net\/member\_illust\.php\?.*illust\_id\=(?<picId>[0-9]+)/, sendPicFromUrl)
 
     bot.hears(/\/?(pic|start)[ _]?(?<picId>[0-9]+)_?(?<picPage>[0-9]*)/, (ctx) => {
-        return sendPic(ctx, ctx.match.groups.picId, ctx.match.groups.picPage || 0)
+        return sendPic(ctx, ctx.match.groups.picId, ctx.match.groups.picPage || 0, { description: true })
     })
 
     const sendPicFromMessage = (ctx, message) => {
         const data = loadDataFromMessage(message)
-        if (data && data.id) return sendPic(ctx, data.id, data.page || 0)
+        if (data && data.id) return sendPic(ctx, data.id, data.page || 0, { description: true })
     }
 
     const recognizeAndSend = (ctx, message) =>
@@ -25,7 +25,7 @@ module.exports = ({ bot, config }) => {
             .then(pics => {
                 if (pics && pics[0]) {
                     if (pics[0].similarity >= config.MIN_SIMILARITY) {
-                        return sendPic(ctx, pics[0].id, 0)
+                        return sendPic(ctx, pics[0].id, 0, { reply: message.message_id, description: true })
                     } else {
                         return ctx.reply(ctx.t('low_simularity'))
                     }
