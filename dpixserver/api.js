@@ -10,7 +10,7 @@ const {
 const getSession = (request) => request.headers.token;
 
 module.exports = async (fastify, options) => {
-  
+
   fastify.get("/fix", async (request, reply) => {
     if (!request.query.url) return { ok: false };
     try {

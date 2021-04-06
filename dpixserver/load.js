@@ -1,4 +1,4 @@
-const {parseData} = require('../dpixivbot/utils/data')
+const { parseData } = require('../dpixivbot/utils/data')
 
 module.exports = async (fastify, options) => {
 

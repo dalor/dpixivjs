@@ -15,3 +15,5 @@ export const discovery = API + "/discovery";
 export const recomendation = id => `${API}/recommendation/${id}`;
 
 export const following = page => `${API}/following/${page}`;
+
+export const botAuth = (session) => `https://t.me/dpixivbot?start=session_${session}`

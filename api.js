@@ -23,20 +23,26 @@ const requestOptions = (options) => {
   return options;
 };
 
-const request = (options, callback) => {
-  https.request(requestOptions(options), callback).end();
+const getSession = (cookies) => cookies.map(c => c.match(/PHPSESSID=([^;]+)/)?.[1]).filter(c => c)[0]
+
+const request = (options, callback, data) => {
+  const req = https.request(requestOptions(options), callback);
+  if (data) {
+    req.write(data)
+  }
+  req.end()
 };
 
 const loadPage = (callback) => (res) => {
   let data = "";
   res.on("data", (chunk) => (data += chunk));
   res.on("end", () => {
-    callback(data);
+    callback(data, res);
   });
 };
 
 const toJson = (callback) => (res) => {
-  loadPage((data) => callback(JSON.parse(data)))(res);
+  loadPage((data) => callback(JSON.parse(data), res))(res);
 };
 
 exports.pipeFixedUrl = (url, reply) => {
@@ -50,7 +56,7 @@ exports.pipeFixedUrl = (url, reply) => {
     .get(request_, (resp) => {
       resp.pipe(reply);
     })
-    // .end();
+  // .end();
 };
 
 exports.info = ({ id }) =>
@@ -110,10 +116,10 @@ exports.shortGroupInfo = ({ ids, session }) =>
               pageCount: parseInt(pic.illust_page_count),
               urls: pic.url
                 ? {
-                    original: pic.url.big,
-                    medium: pic.url.m,
-                    smaller: pic.url["240mw"],
-                  }
+                  original: pic.url.big,
+                  medium: pic.url.m,
+                  smaller: pic.url["240mw"],
+                }
                 : undefined,
             })).sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
           resolve(res);
@@ -170,3 +176,39 @@ exports.following = ({ page, session }) =>
       })
     )
   );
+
+const login = ({ session, ...loginData }) =>
+  new Promise((resolve, reject) => {
+    const data = querystring.stringify(loginData)
+    return request({
+      method: "POST",
+      hostname: "accounts.pixiv.net",
+      path: "/api/login",
+      query: {
+        lang: 'en'
+      },
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Length': data.length
+      },
+      pixSession: session
+    },
+      toJson((data, res) => {
+        resolve({
+          data,
+          session: getSession(res.headers['set-cookie'])
+        })
+      }), data)
+  })
+
+const getDefault = () => new Promise((resolve, reject) => request({
+  hostname: "accounts.pixiv.net",
+  path: "/login",
+}, loadPage((html, res) => resolve({
+  session: getSession(res.headers['set-cookie']),
+  post_key: html.match(/.+postKey\"\:\"([^"]+)\"/)?.[1]
+}))))
+
+const auth = (data) => getDefault().then(def => login(Object.assign(data, def)))
+
+exports.auth = auth

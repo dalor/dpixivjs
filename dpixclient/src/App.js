@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Cookies from 'js-cookie'
 import Pic from "./Pic";
 import Discovery from "./Discovery";
 import Following from "./Following";
@@ -14,7 +15,12 @@ function App({}) {
     setToken(token);
   };
   const loadToken = () => {
-    setToken(localStorage.getItem("token") || "");
+    const pixivSession = Cookies.get('pixivSession')
+    if (pixivSession) {
+      saveToken(pixivSession)
+    } else {
+      setToken(localStorage.getItem("token") || "");
+    }
   };
   if (!token && token != "") loadToken();
   console.log(token);

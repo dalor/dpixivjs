@@ -5,6 +5,4 @@ module.exports = async (fastify, options) => {
     origin: siteUrl,
     credentials: true
   });
-
-  fastify.register(require("./api"));
 };
