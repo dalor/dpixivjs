@@ -3,7 +3,7 @@ module.exports = (botctx) => {
     require("./chooseLang")(botctx)
 
     require("./pic")(botctx)
-    require("./start")(botctx)
+    require("./global")(botctx)
     require("./nav")(botctx)
     require("./controls")(botctx)
     require("./similar")(botctx)

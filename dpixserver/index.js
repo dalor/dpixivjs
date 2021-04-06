@@ -5,7 +5,6 @@ module.exports = async (fastify, options) => {
     credentials: true
   });
 
-  // fastify.register(require("./server"));
   fastify.register(require("./api"));
   fastify.register(require("./load"))
   fastify.register(require("./auth"))

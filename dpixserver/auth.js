@@ -2,23 +2,42 @@ const { session } = require("telegraf");
 const { auth } = require("../api");
 const imageGenerator = require("../imageGenerator")
 
+const fs = require('fs')
+
 module.exports = async (fastify, options) => {
 
+    const setSession = (reply, session) => reply.header('Set-Cookie', `pixivSession=${session}; Path=/`)
+
+    const errorResponse = (data) => ({
+        ok: false,
+        errors: Object.values(data?.body?.validation_errors || {})
+    })
+
     fastify.get("/loginPic/*", async (request, reply) => {
-        const data = await auth(request.query)
-        if (data?.session) {
-            reply.header('Set-Cookie', `pixivSession=${data.session}; Path=/`)
-            return reply.type('image/png').send(imageGenerator(request.query))
+        const { data, session } = await auth(request.query)
+        if (session) {
+            setSession(reply, session)
+            return reply.type('image/png').send(imageGenerator({ ok: true, session }))
         } else {
             reply.code(404)
-            return data
+            return errorResponse(data)
         }
     });
 
     fastify.post("/login", async (request, reply) => {
-        // reply.header("Access-Control-Allow-Origin", "*");
-        // reply.header("Access-Control-Allow-Credentials", "true");
-        // console.log(request.body)
-        return await auth(request.body)
+        const { data, session } = await auth(request.body)
+        if (session) {
+            setSession(reply, session)
+            return { ok: true, session }
+        }
+        else {
+            return errorResponse(data)
+        }
     });
+
+    fastify.get('/script.js', function (request, reply) {
+        fs.readFile('pluginScript.js', (err, fileBuffer) => {
+            reply.send(err || fileBuffer)
+        })
+    })
 };
