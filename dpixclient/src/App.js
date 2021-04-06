@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, useHistory, useParams } from "react-router-dom";
 import Cookies from 'js-cookie'
 import Pic from "./Pic";
 import Discovery from "./Discovery";
@@ -8,7 +8,7 @@ import "./App.css";
 import Main from "./Main";
 import { discovery, following } from "./navs";
 
-function App({}) {
+function App({ }) {
   const [token, setToken] = useState(null);
   const saveToken = (token) => {
     localStorage.setItem("token", token);
@@ -24,6 +24,13 @@ function App({}) {
   };
   if (!token && token != "") loadToken();
   console.log(token);
+  const SetSessionModule = () => {
+    const { session } = useParams();
+    const history = useHistory();
+    saveToken(session)
+    history.push('/')
+    return null
+  }
   return (
     <>
       <Router>
@@ -41,6 +48,9 @@ function App({}) {
             ) : (
               <Main token={token} saveToken={saveToken} />
             )}
+          </Route>
+          <Route path="/session/:session">
+            <SetSessionModule />
           </Route>
           <Route path="/:id">
             <Pic token={token} />

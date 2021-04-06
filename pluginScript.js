@@ -1,6 +1,5 @@
 const sessionKey = 'pixivSession';
 const siteUrl = 'https://dpixiv.herokuapp.com';
-const mainPage = siteUrl + '/'
 
 const saveSession = (session) => {
     window.localStorage.setItem(sessionKey, session);
@@ -35,7 +34,6 @@ const buttonEvent = (e) => getToken(recaptcha_enterprise_score_token => {
         headers: {
             'Content-Type': 'application/json'
         },
-        credentials: 'include',
         body: JSON.stringify(data)
     }).then(res => res.json())
         .then(res => {
@@ -43,7 +41,7 @@ const buttonEvent = (e) => getToken(recaptcha_enterprise_score_token => {
                 newButton.style.background = '#68bdb4';
                 console.log('pixivSession:', res.session);
                 saveSession(res.session);
-                window.location.replace(mainPage);
+                window.location.replace(siteUrl + `/session/${res.session}`);
             }
             else {
                 const prevColor = newButton.style.background
