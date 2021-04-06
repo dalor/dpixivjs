@@ -1,4 +1,4 @@
-const sessionKey = 'dPixivSession';
+const sessionKey = 'pixivSession';
 const siteUrl = 'https://dpixiv.herokuapp.com';
 const mainPage = siteUrl + '/'
 
@@ -35,11 +35,14 @@ const buttonEvent = (e) => getToken(recaptcha_enterprise_score_token => {
         headers: {
             'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify(data)
     }).then(res => res.json())
         .then(res => {
             if (res.ok) {
                 newButton.style.background = '#68bdb4';
+                console.log('pixivSession:', res.session);
+                saveSession(res.session);
                 window.location.replace(mainPage);
             }
             else {
