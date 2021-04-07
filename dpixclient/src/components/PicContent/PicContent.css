@@ -1,0 +1,36 @@
+.pic-content {
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.main-pics {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-pics img {
+    max-width: calc(100% - 2px);
+    margin: 2px;
+}
+
+.pic-title {
+    text-align: center;
+}
+
+.pic-text {
+    font-size: 44px;
+    text-align: center;
+    color: #fff;
+    text-decoration: none;
+}
+
+.pixiv-link {
+    margin-left: 20px;
+    display: inline-block;
+    width: 44px;
+    height: 44px;
+    background: url("../../images/pixiv.png") no-repeat;
+    background-size: 44px;
+}

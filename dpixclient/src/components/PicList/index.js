@@ -1,19 +1,22 @@
 import React, { useState, useRef } from "react";
-import { fix } from "./urls";
-import { PicContent } from "./Pic";
+import { fix } from "../../urls";
+import PicContent from "../PicContent";
 import "./PicList.css";
 
 const SmallPic = ({ pic, i, loadMore }) => {
+
   const [fullPic, setFullPic] = useState(false);
+
+  const [loaded, setLoaded] = useState(false);
 
   const ref = useRef(null);
 
   return (
-    <div className={"small-pic" + (fullPic ? " only-one" : "")} ref={ref}>
+    <div className={"small-pic" + (loaded ? " loaded" : "") + (fullPic ? " only-one" : "")} ref={ref}>
       {fullPic ? (
         <PicContent
           pic={pic}
-          hide={() => {
+          onClick={() => {
             setFullPic(false);
             window.scrollTo(0, ref.current.offsetTop);
           }}
@@ -28,7 +31,11 @@ const SmallPic = ({ pic, i, loadMore }) => {
           {pic.pageCount > 1 && pic.urls && (
             <div className="small-page-count">{pic.pageCount}</div>
           )}
-          <img src={fix(pic.urls.medium)} onClick={() => setFullPic(true)} />
+          <img
+            src={fix(pic.urls.medium)}
+            onClick={() => setFullPic(true)}
+            onLoad={() => setLoaded(true)}
+          />
           <div
             className="more-button"
             onClick={e => {

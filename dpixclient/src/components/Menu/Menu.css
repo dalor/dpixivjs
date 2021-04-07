@@ -1,0 +1,52 @@
+.menu-user-info {
+    width: 100%;
+}
+
+.user-nickname {
+    color: #824F4F;
+    width: 100%;
+    height: 50px;
+    font-size: 40px;
+    line-height: 47px;
+    text-align: center;
+}
+
+.user-followings {
+    margin-left: 50%;
+    color: #9D5454;
+    height: 23px;
+    font-size: 18px;
+    line-height: 21px;
+    text-align: center;
+}
+
+.menu-button {
+    margin-top: 20px;
+    display: block;
+    min-width: 500px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 25px;
+}
+
+.menu-button:hover {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.button-icon {
+    height: 70px;
+}
+
+.button-text {
+    margin: 5px;
+    display: inline-flex;
+    font-size: 44px;
+    height: 70px;
+    line-height: 70px;
+    color: #000;
+}
+
+.button-text span{
+    width: 360px;
+    text-align: center;
+}

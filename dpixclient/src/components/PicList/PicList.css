@@ -13,18 +13,31 @@
 
 .small-pic {
     position: relative;
-    min-width: 300px;
-    min-height: 300px;
-    border: 1px solid #95939373;
+    min-width: 400px;
+    min-height: 400px;
+    background: rgba(255, 255, 255, 0.4);
     margin: 10px;
-    max-width: 90%;
+    border-radius: 10px;
+}
+
+.loaded {
+    min-width: 0px;
+    min-height: 0px;
+}
+
+.small-pic a {
+    display: block;
+    height: 100%;
 }
 
 .small-pic img {
     max-width: 100%;
+    max-height: 100%;
+    display: block;
 }
 
 .small-page-count {
+    display: none;
     position: absolute;
     padding: 8px 10px;
     font-size: 20px;
@@ -33,16 +46,8 @@
     background: #95939373;
 }
 
-.show-more {
-    width: 200px;
-    background: #1782ddd1;
-    font-size: 20px;
-    padding: 10px 20px;
-    text-align: center;
-    color: #ffffff;
-    border-radius: 8px;
-    cursor: pointer;
-    margin: 20px auto;
+.loaded .small-page-count {
+    display: block;
 }
 
 .only-one {
@@ -52,7 +57,7 @@
 
 .more-button {
     position: absolute;
-    background: url("./img/add.png") no-repeat;
+    background: url("../../images/add.png") no-repeat;
     width: 64px;
     height: 64px;
     right: 5px;

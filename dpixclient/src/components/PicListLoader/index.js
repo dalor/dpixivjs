@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { shortGroupInfo, recomendation } from "./urls";
-import PicList from "./PicList";
+import { shortGroupInfoFetch, recomendationFetch } from "../../services/pic";
+import PicList from "../PicList";
 
-export default ({ ids, hide, preloadNext, loadNext, token }) => {
+export default ({ ids, preloadNext, token }) => {
+  
   const partCount = 20;
   const recCount = 10;
 
@@ -15,14 +16,8 @@ export default ({ ids, hide, preloadNext, loadNext, token }) => {
   const dropNLoad = (ids_, count) =>
     new Promise((resolve, reject) => {
       if (ids_ && ids_.length > 0)
-        fetch(shortGroupInfo(ids_.splice(0, count)), {
-          headers: { Token: token },
-        }).then((res) => {
-          if (res.ok)
-            res.json().then((json) => {
-              if (json.ok) resolve(json.data);
-            });
-        });
+        shortGroupInfoFetch(ids_.splice(0, count), token)
+          .then(resolve)
     });
 
   const preloadToTempPics = (ids_) => {
@@ -51,17 +46,7 @@ export default ({ ids, hide, preloadNext, loadNext, token }) => {
       })
   }
 
-  const loadReccomended = (illustId) =>
-    new Promise((resolve, reject) =>
-      fetch(recomendation(illustId), {
-        headers: { Token: token },
-      }).then((res) => {
-        if (res.ok)
-          return res.json().then((json) => {
-            if (json.ok) resolve(json.data.ids);
-          });
-      })
-    );
+  const loadReccomended = (illustId) => recomendationFetch(illustId, token)
 
   const insertAfter = (i, pics_) => {
     setPics(
@@ -88,12 +73,11 @@ export default ({ ids, hide, preloadNext, loadNext, token }) => {
   };
 
   return (
-    !hide && (
-      <div className="pic-loader">
-        <PicList pics={pics} loadMore={loadMore_} />
-        {((ids && ids.length > 0) ||
-          tempIds.length > 0 ||
-          tempPics.length > 0) && (
+    <div className="pic-loader">
+      <PicList pics={pics} loadMore={loadMore_} />
+      {((ids && ids.length > 0) ||
+        tempIds.length > 0 ||
+        tempPics.length > 0) && (
           <div
             className="show-more"
             onClick={() => {
@@ -104,7 +88,7 @@ export default ({ ids, hide, preloadNext, loadNext, token }) => {
             Show more
           </div>
         )}
-      </div>
-    )
-  );
+    </div>
+  )
+
 };

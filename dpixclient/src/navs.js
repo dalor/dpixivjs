@@ -1,3 +1,3 @@
-export const following = "/foll"
+export const following = "/following"
 
-export const discovery = "/dis"
+export const discovery = "/discovery"
