@@ -11,17 +11,17 @@ import SetSession from "../components/SetSession"
 import { discovery, following } from "../navs";
 import { connect } from "react-redux";
 
-export default connect((data) => ({ token: data.token }))(({ token }) => {
+export default connect((data) => ({ user: data.user }))(({ user }) => {
 
     return (
         <Router>
             <Switch>
-                <Route path={discovery}>
-                    <Discovery token={token} />
-                </Route>
-                <Route path={following}>
+                {user?.id && <Route path={discovery}>
+                    <Discovery />
+                </Route>}
+                {user?.id && <Route path={following}>
                     <Following />
-                </Route>
+                </Route>}
                 <Route path="/session/:session">
                     <SetSession />
                 </Route>

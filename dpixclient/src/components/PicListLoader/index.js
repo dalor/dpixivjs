@@ -79,7 +79,7 @@ export default ({ ids, preloadNext, token }) => {
         tempIds.length > 0 ||
         tempPics.length > 0) && (
           <div
-            className="show-more"
+            className="blue-button"
             onClick={() => {
               preload();
               setPics(pics.concat(tempPics.splice(0, partCount)));

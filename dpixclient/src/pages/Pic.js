@@ -5,12 +5,12 @@ import { useParams } from "react-router-dom";
 import SimilarPics from "../components/SimilarPics"
 
 
-export default connect((data) => ({ token: data.token }))(({ token }) => {
+export default connect((data) => ({ user: data.user }))(({ user }) => {
   const { id } = useParams();
   return (
     <div className="page">
       <Pic id={id} />
-      {token && <SimilarPics id={id} token={token} />}
+      {user?.id && <SimilarPics id={id} />}
     </div>
   );
 });

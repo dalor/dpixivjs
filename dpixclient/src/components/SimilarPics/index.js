@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { similarFetch } from "../../services/pic";
 import PicListLoader from "../PicListLoader"
+import { connect } from "react-redux";
 
-export default ({ id, token }) => {
+export default connect((data) => ({ token: data.token }))(({ id, token }) => {
 
   const [similarIds, setSimilarIds] = useState(undefined);
 
@@ -21,7 +22,7 @@ export default ({ id, token }) => {
           />}
         {!showSimilar && (
           <div
-            className="show-more"
+            className="blue-button"
             onClick={() => {
               setShowSimilar(true);
             }}
@@ -33,5 +34,4 @@ export default ({ id, token }) => {
       :
       null
   )
-
-};
+});

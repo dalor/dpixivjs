@@ -1,16 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect, useParams } from "react-router-dom";
 import { connect } from "react-redux";
+import { userInfoFetch } from "../services/user"
+import Loading from "./Loading"
 
 export default connect(null, (dispatch) =>
 ({
-    setSession: (session) => dispatch({
+    setData: (data) => dispatch({
         type: "saveData",
-        data: { token: session }
+        data
     })
 })
-)(({ to, setSession }) => {
+)(({ to, setData }) => {
+
+    const [loaded, setLoaded] = useState(false)
+
     const { session } = useParams();
-    setSession(session)
-    return <Redirect to={to || "/"} />
+
+    const loadUser = () =>
+        userInfoFetch(session)
+            .then(user => {
+                if (user) {
+                    console.log(user.name)
+                    setData({
+                        token: session,
+                        user
+                    })
+                }
+                setLoaded(true)
+            })
+
+    useEffect(() => {
+        loadUser()
+    }, [])
+
+    if (loaded)
+        return <Redirect to={to || "/"} />
+    else
+        return <Loading />
 })

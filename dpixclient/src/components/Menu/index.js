@@ -24,14 +24,14 @@ const MenuButton = ({ icon, text, link, external }) => (
         <Link className="menu-button" to={link}><ButtonText icon={icon} text={text} /></Link>
 )
 
-export default connect((data) => ({ token: data.token }))(({ token }) => (
+export default connect((data) => ({ token: data.token, user: data.user }))(({ token, user }) => (
     <MenuWrapper width="600px" height="560px">
         <div className="menu-user-info">
             <div className="user-nickname">
-                Username
+                {user.name}
             </div>
             <div className="user-followings">
-                Following: 999
+                Following: {user.following}
             </div>
         </div>
         <div className="menu-buttons">
@@ -51,18 +51,11 @@ export default connect((data) => ({ token: data.token }))(({ token }) => (
                 icon={settingsIcon}
             />
             <MenuButton
-                text="Bot"
+                text="Login to Bot"
                 link={botAuth(token)}
                 icon={botIcon}
                 external={true}
             />
         </div>
-        {/* <div className="menu">
-            <Link to={discovery}>Discovery</Link>
-            <Link to={following}>Following</Link>
-            <p>
-                <a href={botAuth(token)}>Bot auth</a>
-            </p>
-        </div> */}
     </MenuWrapper>
 ))

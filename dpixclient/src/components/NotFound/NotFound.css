@@ -1,0 +1,12 @@
+.not-found {
+    top: calc(50% - 160px);
+    left: calc(50% - 80px);
+    position: relative;
+    width: 160px;
+    height: 320px;
+}
+
+.not-found img {
+    width: 100%;
+}
+

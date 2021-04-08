@@ -3,7 +3,6 @@ const { apiDecorator, getSession } = require('../tools')
 const {
     info,
     similar,
-    shortGroupInfo,
     recommender
 } = require("../../api");
 
@@ -16,7 +15,6 @@ module.exports = async (fastify, options) => {
             id: params.id,
         })
     })))
-
 
     fastify.get("/pic/:id/similar", apiDecorator(async ({ params, session }) => ({
         ok: true,

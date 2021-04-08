@@ -23,7 +23,7 @@
 .menu-button {
     margin-top: 20px;
     display: block;
-    min-width: 500px;
+    min-width: 500px; /**/
     height: 80px;
     background: rgba(255, 255, 255, 0.6);
     border-radius: 25px;
@@ -44,9 +44,10 @@
     height: 70px;
     line-height: 70px;
     color: #000;
+    width: 100%;
 }
 
 .button-text span{
-    width: 360px;
+    width: 360px; /**/
     text-align: center;
 }

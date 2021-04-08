@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { infoFetch } from "../../services/pic";
 import Loading from "../Loading"
 import PicContent from "../PicContent"
+import NotFound from "../NotFound"
 import "./Pic.css"
 
 export default ({ id }) => {
@@ -13,7 +14,7 @@ export default ({ id }) => {
 
   return (
     <div className="pic" style={!pic ? { height: '100%' } : {}}>
-      {pic ? <PicContent pic={pic} /> : <Loading />}
+      {pic ? <PicContent pic={pic} /> : pic === undefined ? <Loading /> : <NotFound />}
     </div>
   )
 

@@ -22,7 +22,7 @@ main {
   overflow-y: scroll;
 }
 
-.show-more {
+.blue-button {
   width: 200px;
   background: #1782ddd1;
   font-size: 20px;
@@ -32,12 +32,17 @@ main {
   border-radius: 8px;
   cursor: pointer;
   margin: 20px auto;
+  border: none;
+}
+
+.blue-button:hover {
+  background: #1782dd82;
 }
 
 .center {
   text-align: center;
 }
 
-/* .hide {
+.hide {
   display: none;
-} */
+}

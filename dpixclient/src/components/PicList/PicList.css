@@ -13,8 +13,8 @@
 
 .small-pic {
     position: relative;
-    min-width: 400px;
-    min-height: 400px;
+    min-width: 320px;
+    min-height: 320px;
     background: rgba(255, 255, 255, 0.4);
     margin: 10px;
     border-radius: 10px;

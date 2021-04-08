@@ -1,5 +1,5 @@
 const fastify = require("fastify")({
-    logger: true
+    // logger: true
 });
 
 const bot = require('./dpixivbot')
@@ -8,7 +8,6 @@ fastify.post('/' + bot.token, async request => {
     await bot.handleUpdate(request.body)
     return { ok: true }
 })
-// fastify.register(telegrafPlugin, { bot, path: '/' + bot.token })
 
 fastify.register(require("./dpixserver"));
 

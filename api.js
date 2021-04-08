@@ -56,7 +56,6 @@ exports.pipeFixedUrl = (url, reply) => {
     .get(request_, (resp) => {
       resp.pipe(reply);
     })
-  // .end();
 };
 
 exports.info = ({ id }) =>
@@ -209,6 +208,30 @@ const getDefault = () => new Promise((resolve, reject) => request({
   post_key: html.match(/.+postKey\"\:\"([^"]+)\"/)?.[1]
 }))))
 
-const auth = (data) => getDefault().then(def => login(Object.assign(data, def)))
+exports.auth = (data) => getDefault().then(def => login(Object.assign(data, def)))
 
-exports.auth = auth
+const getGlobalData = ({ session }) => new Promise((resolve, reject) => request({
+  path: "/en/",
+  pixSession: session,
+}, loadPage((html) => {
+  const data = html.match(/.+global\-data\"\ content=\'([^\']+)\'/)?.[1]
+  if (data) resolve(JSON.parse(data))
+  else reject()
+})))
+
+exports.userData = ({ session }) => getGlobalData({ session }).then(data => data.userData)
+
+exports.userExtra = ({ session }) =>
+  new Promise((resolve, reject) =>
+    request(
+      {
+        path: '/ajax/user/extra',
+        pixSession: session,
+      },
+      toJson((json) => {
+        if (!json.error) {
+          resolve(json.body)
+        } else reject();
+      })
+    )
+  );
