@@ -1,4 +1,4 @@
-const config = require("./config")
+const config = require("../config")
 const path = require('path')
 const RedisSession = require('telegraf-session-redis')
 const TelegrafI18n = require('telegraf-i18n')

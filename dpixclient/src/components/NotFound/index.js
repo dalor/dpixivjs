@@ -4,6 +4,6 @@ import NotFoundImage from "../../images/notFound.webp"
 
 export default () => (
   <div className="not-found">
-    <img src={NotFoundImage} />
+    <img src={NotFoundImage} alt="Not found..."/>
   </div>
 );

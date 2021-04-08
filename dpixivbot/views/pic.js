@@ -1,7 +1,7 @@
 const { dataUrl } = require("../utils/data");
 const replyMarkup = require("./controls")
 const { fixChars, originalToRegular, returnToHtml, changePage } = require("../utils/fixes")
-const { PIC_LOAD_URL, PIXIV_PIC_URL } = require("../config")
+const { PIC_LOAD_URL, PIXIV_PIC_URL } = require("../../config")
 
 const Telegraf = require('telegraf');
 

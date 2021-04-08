@@ -1,6 +1,6 @@
 const { info, shortGroupInfo } = require("../../api")
 const { newPic, channelPic } = require("../views/pic")
-const { DEFAULT_CONFIG, DEFAULT_SESSION, PACK_SIZE } = require("../config")
+const { DEFAULT_CONFIG, DEFAULT_SESSION, PACK_SIZE } = require("../../config")
 
 exports.sendPic = (ctx, id, page, data) => info({ id }).then((pic) => {
     return sendOne(ctx, pic, page, data)

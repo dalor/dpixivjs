@@ -28,7 +28,7 @@ export default connect(
       () => {
         if (token)
           loadUser()
-      }, []
+      }, [token]
     )
 
     if (newUser) {

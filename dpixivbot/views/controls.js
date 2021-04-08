@@ -1,5 +1,5 @@
 const Telegraf = require('telegraf');
-const { PIXIV_PIC_URL } = require("../config")
+const { PIXIV_PIC_URL } = require("../../config")
 
 module.exports = (data, ctx) => Telegraf.Extra.markup((markup) => markup.inlineKeyboard([
     [

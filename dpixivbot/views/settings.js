@@ -1,7 +1,7 @@
 const Telegraf = require('telegraf');
 const { dataUrl } = require("../utils/data");
 const { returnToHtml } = require("../utils/fixes")
-const { PIC_LOAD_URL } = require("../config")
+const { PIC_LOAD_URL } = require("../../config")
 
 const replyMarkup = (data, ctx) => Telegraf.Extra.markup((markup) =>
     markup.inlineKeyboard(

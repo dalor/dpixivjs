@@ -1,7 +1,7 @@
 const { dataUrl } = require("../utils/data");
 const { updatePic, updateText } = require("../views/pic")
 const { changePage } = require("./fixes")
-const { PIC_LOAD_URL } = require("../config")
+const { PIC_LOAD_URL } = require("../../config")
 
 module.exports = (ctx, data, changeMedia) => {
     if (ctx.entity) {
