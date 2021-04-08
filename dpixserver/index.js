@@ -5,10 +5,7 @@ module.exports = async (fastify, options) => {
     credentials: true
   });
 
-  fastify.register(require("./api"));
-  fastify.register(require("./load"))
-  fastify.register(require("./auth"))
-  fastify.register(require("./react"));
+  fastify.register(require("./routes"));
 
 }
 

@@ -2,7 +2,7 @@ const path = require("path");
 
 module.exports = async (fastify, options) => {
   fastify.register(require("fastify-static"), {
-    root: path.join(__dirname, "../dpixclient", "build"),
+    root: path.join(__dirname, "../../dpixclient", "build"),
     wildcard: false,
   });
 

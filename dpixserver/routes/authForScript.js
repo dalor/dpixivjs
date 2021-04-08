@@ -1,6 +1,6 @@
 const { session } = require("telegraf");
-const { auth } = require("../api");
-const imageGenerator = require("../imageGenerator")
+const { auth } = require("../../api");
+const imageGenerator = require("../../imageGenerator")
 
 const fs = require('fs')
 
