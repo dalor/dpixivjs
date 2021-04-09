@@ -4,6 +4,7 @@ import PicListLoader from "../components/PicListLoader";
 import { connect } from "react-redux";
 import Loading from "../components/Loading"
 import Page from "../components/Page"
+import { runnerAndDecorator } from "../tools"
 
 export default connect((data) => ({ token: data.token }))(({ token }) => {
 
@@ -24,10 +25,12 @@ export default connect((data) => ({ token: data.token }))(({ token }) => {
     loadPage(setFollowingIds);
   }
 
+  const rad = runnerAndDecorator();
+
   return (
-    <Page className="following">
+    <Page className="following" onBottom={rad.runner}>
       <h2 className="center">Following</h2>
-      {followingIds ? <PicListLoader ids={followingIds} preloadNext={loadPage} token={token} /> : <Loading />}
+      {followingIds ? <PicListLoader ids={followingIds} preloadNext={loadPage} token={token} onBottomDecorator={rad.decorator} /> : <Loading />}
     </Page>
   );
 });
