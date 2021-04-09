@@ -31,7 +31,7 @@ export default connect(
       }, [token]
     )
 
-    if (newUser) {
+    if (user && newUser) {
       if (user.id === newUser.id) {
         setTimeout(() => setUser(newUser)) // setTimeout go brrrrr
       } else {
