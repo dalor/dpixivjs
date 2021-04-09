@@ -3,6 +3,7 @@ import { discoveryFetch } from "../services/pic";
 import PicListLoader from "../components/PicListLoader";
 import { connect } from "react-redux";
 import Loading from "../components/Loading"
+import Page from "../components/Page"
 
 export default connect((data) => ({ token: data.token }))(({ token }) => {
   const [discoveryIds, setDiscoveryIds] = useState(undefined);
@@ -11,9 +12,9 @@ export default connect((data) => ({ token: data.token }))(({ token }) => {
     discoveryFetch(token).then(setDiscoveryIds)
 
   return (
-    <div className="discovery page">
+    <Page className="discovery">
       <h2 className="center">Discovery</h2>
       {discoveryIds ? <PicListLoader ids={discoveryIds} token={token} /> : <Loading />}
-    </div>
+    </Page>
   );
 });

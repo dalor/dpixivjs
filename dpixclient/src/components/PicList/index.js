@@ -3,7 +3,7 @@ import { fix } from "../../urls";
 import PicContent from "../PicContent";
 import "./PicList.css";
 
-const SmallPic = ({ pic, i, loadMore }) => {
+const SmallPic = ({ pic, loadMore }) => {
 
   const [fullPic, setFullPic] = useState(false);
 
@@ -18,7 +18,7 @@ const SmallPic = ({ pic, i, loadMore }) => {
           pic={pic}
           onClick={() => {
             setFullPic(false);
-            window.scrollTo(0, ref.current.offsetTop);
+            ref.current.scrollIntoView()
           }}
         />
       ) : (
@@ -35,14 +35,15 @@ const SmallPic = ({ pic, i, loadMore }) => {
             src={fix(pic.urls.medium)}
             onClick={() => setFullPic(true)}
             onLoad={() => setLoaded(true)}
+            alt={pic.illustTitle}
           />
-          <div
+          {/* <div
             className="more-button"
             onClick={e => {
               e.preventDefault();
               loadMore(pic, i);
             }}
-          />
+          /> */}
         </a>
       )}
     </div>
@@ -51,8 +52,8 @@ const SmallPic = ({ pic, i, loadMore }) => {
 
 export default ({ pics, loadMore }) => (
   <div className="pic-list">
-    {pics.map((pic, key) => (
-      <SmallPic pic={pic} key={key} loadMore={loadMore} i={key} />
+    {pics.map((pic) => (
+      <SmallPic pic={pic} loadMore={loadMore} key={pic.id} />
     ))}
   </div>
 );

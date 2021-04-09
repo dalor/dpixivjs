@@ -1,0 +1,27 @@
+.menu-global-button {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background-repeat: no-repeat;
+    background-size: 55px;
+    height: 55px;
+    width: 55px;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.menu-global-button-inactive {
+    background-image: url("../../images/menuIcon.png");
+}
+
+.menu-global-button-active {
+    background-image: url("../../images/menuIconActive.png")
+}
+
+.menu-block {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    background: rgba(0, 0, 0, 0.5);
+}

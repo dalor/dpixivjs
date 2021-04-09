@@ -18,14 +18,14 @@ const ButtonText = ({ icon, text }) => (
     </div>
 )
 
-const MenuButton = ({ icon, text, link, external }) => (
-    external ?
-        <a className="menu-button" href={link}><ButtonText icon={icon} text={text} /></a> :
-        <Link className="menu-button" to={link}><ButtonText icon={icon} text={text} /></Link>
-)
+export default connect((data) => ({ token: data.token, user: data.user }))(({ token, user, onButtonClick }) => {
+    const MenuButton = ({ icon, text, link, external }) => (
+        external ?
+            <a className="menu-button" href={link}><ButtonText icon={icon} text={text} /></a> :
+            <Link className="menu-button" to={link} onClick={onButtonClick}><ButtonText icon={icon} text={text} /></Link>
+    )
 
-export default connect((data) => ({ token: data.token, user: data.user }))(({ token, user }) => (
-    <MenuWrapper width="600px" height="560px">
+    return (<MenuWrapper width="600px" height="560px">
         <div className="menu-user-info">
             <div className="user-nickname">
                 {user.name}
@@ -58,4 +58,5 @@ export default connect((data) => ({ token: data.token, user: data.user }))(({ to
             />
         </div>
     </MenuWrapper>
-))
+    )
+})

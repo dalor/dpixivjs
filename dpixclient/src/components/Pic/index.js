@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { infoFetch } from "../../services/pic";
 import Loading from "../Loading"
 import PicContent from "../PicContent"
@@ -9,8 +9,12 @@ export default ({ id }) => {
 
   const [pic, setPic] = useState(undefined);
 
-  if (pic === undefined)
-    infoFetch(id).then(setPic)
+  useEffect(() => {
+    setPic(undefined)
+    infoFetch(id).then((pic_) => {
+      setPic(pic_)
+    })
+  }, [id])
 
   return (
     <div className="pic" style={!pic ? { height: '100%' } : {}}>

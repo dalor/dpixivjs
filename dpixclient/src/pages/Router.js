@@ -8,24 +8,31 @@ import Following from "./Following";
 
 import SetSession from "../components/SetSession"
 
+import MenuButton from "../components/MenuButton"
+
 import { discovery, following } from "../navs";
 import { connect } from "react-redux";
 
 export default connect((data) => ({ user: data.user }))(({ user }) => {
 
+    const active = user?.id
+
     return (
         <Router>
             <Switch>
-                {user?.id && <Route path={discovery}>
+                {active && <Route path={discovery}>
+                    <MenuButton />
                     <Discovery />
                 </Route>}
-                {user?.id && <Route path={following}>
+                {active && <Route path={following}>
+                    <MenuButton />
                     <Following />
                 </Route>}
                 <Route path="/session/:session">
                     <SetSession />
                 </Route>
                 <Route path="/:id">
+                    {active && <MenuButton />}
                     <Pic />
                 </Route>
                 <Route path="/">

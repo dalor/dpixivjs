@@ -3,6 +3,7 @@ import { followingFetch } from "../services/pic";
 import PicListLoader from "../components/PicListLoader";
 import { connect } from "react-redux";
 import Loading from "../components/Loading"
+import Page from "../components/Page"
 
 export default connect((data) => ({ token: data.token }))(({ token }) => {
 
@@ -24,9 +25,9 @@ export default connect((data) => ({ token: data.token }))(({ token }) => {
   }
 
   return (
-    <div className="following page">
+    <Page className="following">
       <h2 className="center">Following</h2>
       {followingIds ? <PicListLoader ids={followingIds} preloadNext={loadPage} token={token} /> : <Loading />}
-    </div>
+    </Page>
   );
 });
