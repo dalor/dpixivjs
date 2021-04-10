@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Main from "./Main"
+import Settings from "./Settings"
 import Pic from "./Pic"
 import Discovery from "./Discovery";
 import Following from "./Following";
@@ -10,7 +11,7 @@ import SetSession from "../components/SetSession"
 
 import MenuButton from "../components/MenuButton"
 
-import { discovery, following } from "../navs";
+import { discovery, following, settings } from "../navs";
 import { connect } from "react-redux";
 
 export default connect((data) => ({ user: data.user }))(({ user }) => {
@@ -27,6 +28,10 @@ export default connect((data) => ({ user: data.user }))(({ user }) => {
                 {active && <Route path={following}>
                     <MenuButton />
                     <Following />
+                </Route>}
+                {active && <Route path={settings}>
+                    <MenuButton />
+                    <Settings />
                 </Route>}
                 <Route path="/session/:session">
                     <SetSession />

@@ -2,7 +2,7 @@ import React from "react";
 import "./Menu.css"
 import MenuWrapper from "../MenuWrapper"
 import { Link } from "react-router-dom";
-import { discovery, following } from "../../navs";
+import { discovery, following, settings } from "../../navs";
 import { botAuth } from "../../urls"
 import { connect } from "react-redux";
 
@@ -47,7 +47,7 @@ export default connect((data) => ({ token: data.token, user: data.user }))(({ to
             />
             <MenuButton
                 text="Settings"
-                link={"/"}
+                link={settings}
                 icon={settingsIcon}
             />
             <MenuButton

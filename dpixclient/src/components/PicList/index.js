@@ -2,8 +2,10 @@ import React, { useState, useRef } from "react";
 import { fix } from "../../urls";
 import PicContent from "../PicContent";
 import "./PicList.css";
+import { connect } from "react-redux";
+import { defaultSettings } from "../../config"
 
-const SmallPic = ({ pic, loadMore }) => {
+const SmallPic = ({ pic, loadMore, quality }) => {
 
   const [fullPic, setFullPic] = useState(false);
 
@@ -32,7 +34,7 @@ const SmallPic = ({ pic, loadMore }) => {
             <div className="small-page-count">{pic.pageCount}</div>
           )}
           <img
-            src={fix(pic.urls.medium)}
+            src={fix(pic.urls[quality])}
             onClick={() => setFullPic(true)}
             onLoad={() => setLoaded(true)}
             alt={pic.illustTitle}
@@ -50,10 +52,10 @@ const SmallPic = ({ pic, loadMore }) => {
   );
 };
 
-export default ({ pics, loadMore }) => (
+export default connect((data) => ({ quality: Object.assign(defaultSettings, data.settings || {}).picPreviewQuality }))(({ pics, loadMore, quality }) => (
   <div className="pic-list">
     {pics.map((pic) => (
-      <SmallPic pic={pic} loadMore={loadMore} key={pic.id} />
+      <SmallPic pic={pic} quality={quality} loadMore={loadMore} key={pic.id} />
     ))}
   </div>
-);
+));
