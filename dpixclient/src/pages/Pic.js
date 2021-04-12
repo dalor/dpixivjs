@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import SimilarPics from "../components/SimilarPics"
 import Page from "../components/Page"
 import { runnerAndDecorator } from "../tools"
+import Loading from "../components/Loading"
 
 export default connect((data) => ({ user: data.user }))(({ user }) => {
 
@@ -16,12 +17,21 @@ export default connect((data) => ({ user: data.user }))(({ user }) => {
     setOldId(id)
   }, [id])
 
+  if (id !== oldId) {
+    setOldId(id)
+    window.page.goTop()
+  }
+
   const rad = runnerAndDecorator();
 
   return (
     <Page onBottom={rad.runner}>
-      <Pic id={oldId} />
-      {user?.id && <SimilarPics id={oldId} onBottomDecorator={rad.decorator} />}
+      {id === oldId ? <>
+        <Pic id={oldId} />
+        {user?.id && <SimilarPics id={oldId} onBottomDecorator={rad.decorator} />}
+      </> :
+        <Loading />
+      }
     </Page>
   );
 });

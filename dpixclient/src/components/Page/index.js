@@ -23,8 +23,18 @@ export default ({ children, className, onBottom }) => {
 
   const onScroll = ScrollEvent(bottomHeight, onBottom)
 
+  const setGlobals = (e) => {
+    const target = e.currentTarget
+    window.page = {
+      goTop: () => {
+        console.log(target)
+        target.scrollTop = 0
+      }
+    }
+  }
+
   return (
-    <div className={"page" + (className ? ` ${className}` : "")} onScroll={onBottom && onScroll}>
+    <div className={"page" + (className ? ` ${className}` : "")} onScroll={onBottom && onScroll} onLoad={setGlobals}>
       {children}
     </div>
   )
