@@ -42,3 +42,5 @@ full: Full
 saucenao_error: Not recognized. Try later
 low_simularity: Low simularity
 was_sent_to_channel: 'Was sent to ${channel}'
+wrong_session: Wrong token
+auth_greeting: 'Welcome back, <a href="${profileImg}">${name}</a>'

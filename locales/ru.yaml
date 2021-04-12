@@ -42,3 +42,5 @@ full: Все
 saucenao_error: Не была опознана. Попробуй позже
 low_simularity: Малая схожесть
 was_sent_to_channel: 'Было отправлено в ${channel}'
+wrong_session: Неправильный ключ
+auth_greeting: 'С подключением, <a href="${profileImg}">${name}</a>'
