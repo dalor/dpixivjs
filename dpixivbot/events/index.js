@@ -10,4 +10,6 @@ module.exports = (botctx) => {
   require("./settings")(botctx);
   require("./channel")(botctx);
   require("./recommend")(botctx);
+  require("./recommends")(botctx);
+  require("./following")(botctx);
 };

@@ -12,9 +12,9 @@ exports.sendPics = (ctx, ids, data) =>
     ids,
     session: ctx.session.session || DEFAULT_SESSION,
   }).then((pics) =>
-    data && data.group
+    data?.group
       ? Promise.all(
-          splitToPacks(pics, (data && data.size) || PACK_SIZE).map((pack) =>
+          splitToPacks(pics, data?.size || PACK_SIZE).map((pack) =>
             sendPack(ctx, pack, data)
           )
         )

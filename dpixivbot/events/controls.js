@@ -23,7 +23,7 @@ module.exports = ({ bot }) => {
     "file",
     loadData((ctx, data) => {
       return ctx
-        .answerCbQuery(ctx.t("loading..."))
+        .answerCbQuery(ctx.t("loading"))
         .then(() =>
           ctx.replyWithDocument(data.url, {
             reply_to_message_id: ctx.callbackQuery.message.message_id,

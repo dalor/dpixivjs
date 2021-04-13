@@ -56,8 +56,8 @@ module.exports = ({ config, bot }) => {
         const { text, reply_markup } = newSetting({
             ctx,
             data: {
-                description: ctx.session.description || config.DEFAULT_CONFIG.description,
-                group: ctx.session.group || config.DEFAULT_CONFIG.group,
+                description: ctx.session.description === undefined ? config.DEFAULT_CONFIG.description: ctx.session.description,
+                group: ctx.session.group === undefined ? config.DEFAULT_CONFIG.group: ctx.session.group,
                 count: ctx.session.count || config.DEFAULT_CONFIG.count
             }
         })
