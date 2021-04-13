@@ -13,7 +13,6 @@ by_one: "\U0001F4C4 По одному"
 back_btn: <
 minus: ➖
 plus: ➕
-loading...: Загрузка...
 settings_text: Настрой базовую конфигурацию и нажми <b>СОХРАНИТЬ</b>
 save: СОХРАНИТЬ
 similar_count: 'Количество похожих:'
@@ -44,3 +43,7 @@ low_simularity: Малая схожесть
 was_sent_to_channel: 'Было отправлено в ${channel}'
 wrong_session: Неправильный ключ
 auth_greeting: 'С подключением, <a href="${profileImg}">${name}</a>'
+please_auth: Авторизируйтесь (/login)
+more_recommend: Еще
+show_recommend: Показать картинку
+loading: Загрузка...

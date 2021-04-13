@@ -12,7 +12,6 @@ hidden: Сховано
 hide: "\U0001F53C"
 in_group: "\U0001F4C2 В групі"
 in_group_alert: В пачці
-loading...: Завантаження...
 minus: ➖
 more: Більше
 next: ▶️
@@ -44,3 +43,7 @@ low_simularity: Мала відповідність
 was_sent_to_channel: 'Було надіслано в ${channel}'
 wrong_session: Неправильний ключ
 auth_greeting: 'Здоровенькі були, <a href="${profileImg}">${name}</a>'
+please_auth: Авторизуйтесь (/login)
+more_recommend: Ще
+show_recommend: Показати картинку
+loading: Завантаження...

@@ -10,4 +10,8 @@ module.exports = async (fastify, options) => {
         }
         return { ok: false }
     });
+
+    fastify.get("/undefined", async (request, reply) => {
+        return { ok: false }
+    });
 };

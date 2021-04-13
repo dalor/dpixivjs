@@ -5,37 +5,37 @@ const { sendPics } = require("../utils/send")
 
 module.exports = ({ config, bot }) => {
 
-    bot.action('withDescription', (ctx) => loadData(ctx, (data) => {
+    bot.action('withDescription', loadData((ctx, data) => {
         data.description = true
         return update(ctx, data).then(() => ctx.answerCbQuery(ctx.t('with_description_alert')))
     }))
 
-    bot.action('withoutDescription', (ctx) => loadData(ctx, (data) => {
+    bot.action('withoutDescription', loadData((ctx, data) => {
         data.description = false
         return update(ctx, data).then(() => ctx.answerCbQuery(ctx.t('without_description_alert')))
     }))
 
-    bot.action('inGroup', (ctx) => loadData(ctx, (data) => {
+    bot.action('inGroup', loadData((ctx, data) => {
         data.group = true
         return update(ctx, data).then(() => ctx.answerCbQuery(ctx.t('in_group_alert')))
     }))
 
-    bot.action('byOne', (ctx) => loadData(ctx, (data) => {
+    bot.action('byOne', loadData((ctx, data) => {
         data.group = false
         return update(ctx, data).then(() => ctx.answerCbQuery(ctx.t('by_one_alert')))
     }))
 
-    bot.action('plus', (ctx) => loadData(ctx, (data) => {
+    bot.action('plus', loadData((ctx, data) => {
         data.count = data.count + config.PACK_SIZE <= config.MAX_PACK_COUNT ? data.count + config.PACK_SIZE : config.MAX_PACK_COUNT
         return update(ctx, data).catch(() => ctx.answerCbQuery(ctx.t('no_more'))).then(() => ctx.answerCbQuery(''))
     }))
 
-    bot.action('minus', (ctx) => loadData(ctx, (data) => {
+    bot.action('minus', loadData((ctx, data) => {
         data.count = data.count - config.PACK_SIZE >= config.MIN_PACK_COUNT ? data.count - config.PACK_SIZE : config.MIN_PACK_COUNT
         return update(ctx, data).catch(() => ctx.answerCbQuery(ctx.t('no_less'))).then(() => ctx.answerCbQuery(''))
     }))
 
-    bot.action('similarSend', (ctx) => loadData(ctx, (data) => {
+    bot.action('similarSend', loadData((ctx, data) => {
         return similar({
             id: data.id,
             session: ctx.session.session || config.DEFAULT_SESSION,

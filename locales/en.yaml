@@ -13,7 +13,6 @@ by_one: "\U0001F4C4 By one"
 back_btn: <
 minus: ➖
 plus: ➕
-loading...: Loading...
 settings_text: Choose your default settings and press <b>SAVE</b>
 save: SAVE
 similar_count: 'Similar count:'
@@ -44,3 +43,7 @@ low_simularity: Low simularity
 was_sent_to_channel: 'Was sent to ${channel}'
 wrong_session: Wrong token
 auth_greeting: 'Welcome back, <a href="${profileImg}">${name}</a>'
+please_auth: Please /login
+more_recommend: More
+show_recommend: Show picture
+loading: Loading...

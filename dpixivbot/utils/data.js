@@ -33,10 +33,10 @@ exports.loadDataFromMessage = (message) => {
     }
 }
 
-exports.loadData = (ctx, callback) => {
+exports.loadData = (callback) => (ctx) => {
     const pair = findDataUrl(ctx.callbackQuery.message.caption_entities || ctx.callbackQuery.message.entities)
     if (pair) {
         ctx.entity = pair.entity
-        return callback(parseData(pair.url.query[data_attr]))
+        return callback(ctx, parseData(pair.url.query[data_attr]))
     }
 }
