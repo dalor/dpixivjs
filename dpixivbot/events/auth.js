@@ -2,8 +2,8 @@ const { Extra } = require("telegraf");
 const { userData } = require("../../api");
 
 module.exports = ({ bot }) => {
-  bot.hears(/\/start session_(.+)/, async (ctx) => {
-    const session = ctx.match[1];
+  const proceedSession = async (ctx) => {
+    const session = ctx.match.groups.session;
     return userData({ session })
       .then((user) => {
         const { name, profileImg } = user;
@@ -14,5 +14,9 @@ module.exports = ({ bot }) => {
         );
       })
       .catch((e) => console.log(e) || ctx.reply(ctx.t("wrong_session")));
-  });
+  };
+
+  bot.hears(/.+\/session\/(?<session>[^\/\?\&]+)/, proceedSession);
+
+  bot.hears(/\/start session_(?<session>.+)/, proceedSession);
 };
