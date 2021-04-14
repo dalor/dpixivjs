@@ -9,7 +9,6 @@ import {
   picQualities,
   defaultSettings,
 } from "../../config";
-import { session } from "telegraf";
 
 const findOptionByName = (opts, name) =>
   name && opts.find(({ value }) => value === name);
@@ -29,7 +28,7 @@ const Settings = connect(
         data: { settings },
       }),
   })
-)(({ settings, setSettings }) => {
+)(({ settings, setSettings, session }) => {
   const picOptions = toOptions(picQualities);
 
   const picPreviewOptions = toOptions(picPreviewQualities);

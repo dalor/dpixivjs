@@ -2,8 +2,10 @@ import React from "react";
 import HelpLogin from "../components/HelpLogin";
 import Page from "../components/Page";
 
-export default () => (
+const HelpPage = () => (
   <Page>
     <HelpLogin />
   </Page>
 );
+
+export default HelpPage;

@@ -7,7 +7,7 @@ import Page from "../components/Page";
 import { runnerAndDecorator } from "../tools";
 import Loading from "../components/Loading";
 
-export default connect((data) => ({ user: data.user }))(({ user }) => {
+const PicPage = connect((data) => ({ user: data.user }))(({ user }) => {
   const { id } = useParams();
 
   const [oldId, setOldId] = useState(id);
@@ -38,3 +38,5 @@ export default connect((data) => ({ user: data.user }))(({ user }) => {
     </Page>
   );
 });
+
+export default PicPage;

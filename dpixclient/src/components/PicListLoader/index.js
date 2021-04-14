@@ -13,7 +13,7 @@ const PicListLoader = ({ ids, preloadNext, token, onBottomDecorator }) => {
   const [tempIds, setTempIds] = useState([]);
 
   const dropNLoad = (ids_, count) =>
-    new Promise((resolve, reject) => {
+    new Promise((resolve) => {
       if (ids_ && ids_.length > 0)
         shortGroupInfoFetch(ids_.splice(0, count), token).then(resolve);
     });

@@ -15,7 +15,7 @@ import MenuButton from "../components/MenuButton";
 import { discovery, following, settings } from "../navs";
 import { connect } from "react-redux";
 
-export default connect((data) => ({ user: data.user }))(({ user }) => {
+const RouterPage = connect((data) => ({ user: data.user }))(({ user }) => {
   const active = user?.id;
 
   return (
@@ -56,3 +56,5 @@ export default connect((data) => ({ user: data.user }))(({ user }) => {
     </Router>
   );
 });
+
+export default RouterPage;

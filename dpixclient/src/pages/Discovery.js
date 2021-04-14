@@ -6,25 +6,29 @@ import Loading from "../components/Loading";
 import Page from "../components/Page";
 import { runnerAndDecorator } from "../tools";
 
-export default connect((data) => ({ token: data.token }))(({ token }) => {
-  const [discoveryIds, setDiscoveryIds] = useState(undefined);
+const DiscoveryPage = connect((data) => ({ token: data.token }))(
+  ({ token }) => {
+    const [discoveryIds, setDiscoveryIds] = useState(undefined);
 
-  if (!discoveryIds) discoveryFetch(token).then(setDiscoveryIds);
+    if (!discoveryIds) discoveryFetch(token).then(setDiscoveryIds);
 
-  const rad = runnerAndDecorator();
+    const rad = runnerAndDecorator();
 
-  return (
-    <Page className="discovery" onBottom={rad.runner}>
-      <h2 className="center">Discovery</h2>
-      {discoveryIds ? (
-        <PicListLoader
-          ids={discoveryIds}
-          token={token}
-          onBottomDecorator={rad.decorator}
-        />
-      ) : (
-        <Loading />
-      )}
-    </Page>
-  );
-});
+    return (
+      <Page className="discovery" onBottom={rad.runner}>
+        <h2 className="center">Discovery</h2>
+        {discoveryIds ? (
+          <PicListLoader
+            ids={discoveryIds}
+            token={token}
+            onBottomDecorator={rad.decorator}
+          />
+        ) : (
+          <Loading />
+        )}
+      </Page>
+    );
+  }
+);
+
+export default DiscoveryPage;
