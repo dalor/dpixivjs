@@ -3,10 +3,9 @@ import { fix } from "../../urls";
 import PicContent from "../PicContent";
 import "./PicList.css";
 import { connect } from "react-redux";
-import { defaultSettings } from "../../config"
+import { defaultSettings } from "../../config";
 
 const SmallPic = ({ pic, loadMore, quality }) => {
-
   const [fullPic, setFullPic] = useState(false);
 
   const [loaded, setLoaded] = useState(false);
@@ -14,19 +13,24 @@ const SmallPic = ({ pic, loadMore, quality }) => {
   const ref = useRef(null);
 
   return (
-    <div className={"small-pic" + (loaded ? " loaded" : "") + (fullPic ? " only-one" : "")} ref={ref}>
+    <div
+      className={
+        "small-pic" + (loaded ? " loaded" : "") + (fullPic ? " only-one" : "")
+      }
+      ref={ref}
+    >
       {fullPic ? (
         <PicContent
           pic={pic}
           onClick={() => {
             setFullPic(false);
-            ref.current.scrollIntoView()
+            ref.current.scrollIntoView();
           }}
         />
       ) : (
         <a
           href={`/${pic.illustId}`}
-          onClick={e => {
+          onClick={(e) => {
             e.preventDefault();
           }}
         >
@@ -52,10 +56,15 @@ const SmallPic = ({ pic, loadMore, quality }) => {
   );
 };
 
-export default connect((data) => ({ quality: Object.assign(defaultSettings, data.settings || {}).picPreviewQuality }))(({ pics, loadMore, quality }) => (
+const PicList = connect((data) => ({
+  quality: Object.assign(defaultSettings, data.settings || {})
+    .picPreviewQuality,
+}))(({ pics, loadMore, quality }) => (
   <div className="pic-list">
     {pics.map((pic) => (
       <SmallPic pic={pic} quality={quality} loadMore={loadMore} key={pic.id} />
     ))}
   </div>
 ));
+
+export default PicList;

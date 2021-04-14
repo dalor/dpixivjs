@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { shortGroupInfoFetch, recomendationFetch } from "../../services/pic";
 import PicList from "../PicList";
 
-export default ({ ids, preloadNext, token, onBottomDecorator }) => {
-
+const PicListLoader = ({ ids, preloadNext, token, onBottomDecorator }) => {
   const partCount = 20;
   const recCount = 10;
 
@@ -16,8 +15,7 @@ export default ({ ids, preloadNext, token, onBottomDecorator }) => {
   const dropNLoad = (ids_, count) =>
     new Promise((resolve, reject) => {
       if (ids_ && ids_.length > 0)
-        shortGroupInfoFetch(ids_.splice(0, count), token)
-          .then(resolve)
+        shortGroupInfoFetch(ids_.splice(0, count), token).then(resolve);
     });
 
   const preloadToTempPics = (ids_) => {
@@ -39,14 +37,13 @@ export default ({ ids, preloadNext, token, onBottomDecorator }) => {
   };
 
   useEffect(() => {
-    dropNLoad(ids, partCount)
-      .then((data) => {
-        preload();
-        setPics(data || []);
-      })
-  }, [ids])
+    dropNLoad(ids, partCount).then((data) => {
+      preload();
+      setPics(data || []);
+    });
+  }, [ids]);
 
-  const loadReccomended = (illustId) => recomendationFetch(illustId, token)
+  const loadReccomended = (illustId) => recomendationFetch(illustId, token);
 
   const insertAfter = (i, pics_) => {
     setPics(
@@ -72,26 +69,26 @@ export default ({ ids, preloadNext, token, onBottomDecorator }) => {
     else loadMorePics(pic.similarIds, i);
   };
 
-  const addTempPics = () => new Promise(() => setPics(pics.concat(tempPics.splice(0, partCount))))
+  const addTempPics = () =>
+    new Promise(() => setPics(pics.concat(tempPics.splice(0, partCount))));
 
-  const showMore = () => Promise.all([addTempPics(), preload()])
+  const showMore = () => Promise.all([addTempPics(), preload()]);
 
-  const canBeLoaded = (ids && ids.length > 0) || tempIds.length > 0 || tempPics.length > 0
+  const canBeLoaded =
+    (ids && ids.length > 0) || tempIds.length > 0 || tempPics.length > 0;
 
-  onBottomDecorator && onBottomDecorator(canBeLoaded && showMore)
+  onBottomDecorator && onBottomDecorator(canBeLoaded && showMore);
 
   return (
     <div className="pic-loader">
       <PicList pics={pics} loadMore={loadMore} />
       {canBeLoaded && (
-        <div
-          className="blue-button"
-          onClick={showMore}
-        >
+        <div className="blue-button" onClick={showMore}>
           Show more
         </div>
       )}
     </div>
-  )
-
+  );
 };
+
+export default PicListLoader;

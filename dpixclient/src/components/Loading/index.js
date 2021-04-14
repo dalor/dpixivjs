@@ -1,10 +1,12 @@
 import React from "react";
-import "./Loading.css"
+import "./Loading.css";
 
-export default () => (
-    <div className="loader">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  );
+const Loading = () => (
+  <div className="loader">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+);
+
+export default Loading;

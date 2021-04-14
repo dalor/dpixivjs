@@ -1,30 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { similarFetch } from "../../services/pic";
-import PicListLoader from "../PicListLoader"
+import PicListLoader from "../PicListLoader";
 import { connect } from "react-redux";
 
-export default connect((data) => ({ token: data.token }))(({ id, token, onBottomDecorator }) => {
+const SimilarPics = connect((data) => ({ token: data.token }))(
+  ({ id, token, onBottomDecorator }) => {
+    const [similarIds, setSimilarIds] = useState(undefined);
 
-  const [similarIds, setSimilarIds] = useState(undefined);
+    const [showSimilar, setShowSimilar] = useState(true); //false
 
-  const [showSimilar, setShowSimilar] = useState(true); //false
+    useEffect(() => {
+      similarFetch(id, token).then((ids) => {
+        setSimilarIds(ids);
+      });
+      setSimilarIds([]);
+    }, [id]);
 
-  useEffect(() => {
-    similarFetch(id, token).then(ids => {
-      setSimilarIds(ids)
-    })
-    setSimilarIds([])
-  }, [id])
-
-  return (
-    similarIds ?
+    return similarIds ? (
       <div className="similar-pics">
-        {showSimilar &&
+        {showSimilar && (
           <PicListLoader
             ids={similarIds}
             token={token}
             onBottomDecorator={onBottomDecorator}
-          />}
+          />
+        )}
         {!showSimilar && (
           <div
             className="blue-button"
@@ -36,7 +36,8 @@ export default connect((data) => ({ token: data.token }))(({ id, token, onBottom
           </div>
         )}
       </div>
-      :
-      null
-  )
-});
+    ) : null;
+  }
+);
+
+export default SimilarPics;

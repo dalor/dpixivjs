@@ -1,9 +1,11 @@
 import React from "react";
-import "./NotFound.css"
-import NotFoundImage from "../../images/notFound.webp"
+import "./NotFound.css";
+import NotFoundImage from "../../images/notFound.webp";
 
-export default () => (
+const NotFound = () => (
   <div className="not-found">
-    <img src={NotFoundImage} alt="Not found..."/>
+    <img src={NotFoundImage} alt="Not found..." />
   </div>
 );
+
+export default NotFound;
