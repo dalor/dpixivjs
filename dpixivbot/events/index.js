@@ -3,6 +3,7 @@ module.exports = (botctx) => {
 
   require("./pic")(botctx);
   require("./auth")(botctx);
+  require("./login")(botctx);
   require("./global")(botctx);
   require("./nav")(botctx);
   require("./controls")(botctx);
