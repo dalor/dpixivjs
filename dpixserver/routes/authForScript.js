@@ -37,7 +37,7 @@ module.exports = async (fastify, options) => {
     }
   });
 
-  fastify.get("/script.js", function (request, reply) {
+  fastify.get("/script.js", async (request, reply) => {
     fs.readFile("pluginScript.js", (err, fileBuffer) => {
       reply.send(err || replaceBuffer(fileBuffer, "{siteUrl}", SITE_URL));
     });
