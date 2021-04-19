@@ -1,5 +1,5 @@
 const sessionKey = 'pixivSession';
-const siteUrl = 'https://dpixiv.herokuapp.com';
+const siteUrl = '{siteUrl}';
 
 const saveSession = (session) => {
     window.localStorage.setItem(sessionKey, session);

@@ -4,6 +4,7 @@
   "description": "",
   "main": "api.js",
   "dependencies": {
+    "buffer-replace": "^1.0.0",
     "cheerio": "^1.0.0-rc.5",
     "dotenv": "^8.2.0",
     "fastify": "^3.8.0",
@@ -24,7 +25,9 @@
     "telegraf-i18n": "^6.6.0",
     "telegraf-session-redis": "^5.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
   "scripts": {
     "start": "node index.js",
     "server": "nodemon -r dotenv/config index.js",
