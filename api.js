@@ -19,6 +19,7 @@ const requestOptions = (options) => {
     options.headers["Cookie"] = `PHPSESSID=${options.pixSession};`;
   if (options.referer) options.headers["Referer"] = options.referer;
   if (options.csrfToken) options.headers["x-csrf-token"] = options.csrfToken;
+  options.path = encodeURI(options.path)
   if (options.query) options.path += "?" + querystring.stringify(options.query);
   if (options.pathname && !options.path) options.path = options.pathname;
   return options;
