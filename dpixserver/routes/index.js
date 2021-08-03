@@ -6,7 +6,6 @@ module.exports = async (fastify, options) => {
   fastify.register(require("./user"), { prefix: "/user" });
 
   fastify.register(require("./load"));
-  fastify.register(require("./search"));
   fastify.register(require("./authForScript"));
 
   fastify.register(require("./react"));
