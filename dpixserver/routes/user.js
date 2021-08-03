@@ -2,9 +2,17 @@ const { apiDecorator, getSession } = require("../tools");
 
 const { recommender, following, userData, userExtra } = require("../../api");
 
+const { responseScheme, headersTokenScheme, idsScheme } = require("../schemas")
+
 module.exports = async (fastify, options, done) => {
   fastify.get(
     "/info",
+    {
+      schema: {
+        headers: headersTokenScheme,
+        response: responseScheme()
+      }
+    },
     apiDecorator(
       async ({ session }) => ({
         ok: true,
@@ -18,6 +26,12 @@ module.exports = async (fastify, options, done) => {
 
   fastify.get(
     "/extra",
+    {
+      schema: {
+        headers: headersTokenScheme,
+        response: responseScheme()
+      }
+    },
     apiDecorator(
       async ({ session }) => ({
         ok: true,
@@ -31,6 +45,12 @@ module.exports = async (fastify, options, done) => {
 
   fastify.get(
     "/discovery",
+    {
+      schema: {
+        headers: headersTokenScheme,
+        response: responseScheme(idsScheme)
+      }
+    },
     apiDecorator(
       async ({ session }) => ({
         ok: true,
@@ -45,6 +65,21 @@ module.exports = async (fastify, options, done) => {
 
   fastify.get(
     "/following/:page",
+    {
+      schema: {
+        params: {
+          type: 'object',
+          properties: {
+            page: {
+              type: 'integer',
+              default: 1
+            }
+          }
+        },
+        headers: headersTokenScheme,
+        response: responseScheme(idsScheme)
+      }
+    },
     apiDecorator(
       async ({ session, params }) => ({
         ok: true,

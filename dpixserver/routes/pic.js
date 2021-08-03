@@ -4,9 +4,24 @@ const { info, similar, recommender } = require("../../api");
 
 const { DEFAULT_PREVIEW_PIC_URL } = require("../../config");
 
+const { responseScheme, headersTokenScheme, idsScheme } = require("../schemas")
+
 module.exports = async (fastify, options, done) => {
   fastify.get(
     "/:id/info",
+    {
+      schema: {
+        params: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'integer'
+            }
+          }
+        },
+        response: responseScheme()
+      }
+    },
     apiDecorator(async ({ params }) => ({
       ok: true,
       data: await info({
@@ -17,6 +32,20 @@ module.exports = async (fastify, options, done) => {
 
   fastify.get(
     "/:id/similar",
+    {
+      schema: {
+        params: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'integer'
+            }
+          }
+        },
+        headers: headersTokenScheme,
+        response: responseScheme(idsScheme)
+      }
+    },
     apiDecorator(
       async ({ params, session }) => ({
         ok: true,
@@ -31,12 +60,35 @@ module.exports = async (fastify, options, done) => {
 
   fastify.get(
     "/:id/recommendation",
+    {
+      schema: {
+        params: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'integer'
+            }
+          }
+        },
+        query: {
+          type: 'object',
+          properties: {
+            count: {
+              type: 'integer',
+              default: 100
+            }
+          }
+        },
+        headers: headersTokenScheme,
+        response: responseScheme(idsScheme)
+      }
+    },
     apiDecorator(
-      async ({ params, session }) => ({
+      async ({ params, session, query }) => ({
         ok: true,
         data: await recommender({
-          count: 300,
-          sample_illusts: [request.params.id],
+          count: query.count || 100,
+          sample_illusts: [params.id],
           session,
         }),
       }),
@@ -44,7 +96,7 @@ module.exports = async (fastify, options, done) => {
     )
   );
 
-  fastify.get("/:id/preview", async ({ params }, reply) => {
+  fastify.get("/:id/preview", { schema: { hide: true } }, async ({ params }, reply) => {
     try {
       await info({
         id: params.id,

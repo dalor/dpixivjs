@@ -20,17 +20,17 @@ module.exports = async (fastify, options) => {
     return buffer;
   };
 
-  fastify.get("/*", async ({ params }, reply) => {
+  fastify.get("/*", { schema: { hide: true } }, async ({ params }, reply) => {
     const match = params["*"].match(/([0-9]+)/);
     if (match) {
       const id = match[1];
       fs.readFile(index, (err, fileBuffer) => {
         reply.type("text/html").send(
           err ||
-            replacer(fileBuffer, [
-              ["{url}", SITE_URL + `/${id}`],
-              ["{image}", SITE_URL + `/pic/${id}/preview`],
-            ])
+          replacer(fileBuffer, [
+            ["{url}", SITE_URL + `/${id}`],
+            ["{image}", SITE_URL + `/pic/${id}/preview`],
+          ])
         );
       });
     } else return reply.sendFile("index.html");

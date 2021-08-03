@@ -18,4 +18,8 @@ module.exports = ({ bot, config }) => {
       )
     )
   );
+
+  bot.command("token", (ctx) =>
+    ctx.reply(`<code>${ctx.session.session}</code>`, { parse_mode: 'HTML' })
+  );
 };

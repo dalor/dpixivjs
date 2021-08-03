@@ -14,7 +14,7 @@ module.exports = async (fastify, options) => {
     errors: Object.values(data?.body?.validation_errors || {}),
   });
 
-  fastify.get("/loginPic/*", async (request, reply) => {
+  fastify.get("/loginPic/*", { schema: { hide: true } }, async (request, reply) => {
     const { data, session } = await auth(request.query);
     if (session) {
       setSession(reply, session);
@@ -27,7 +27,7 @@ module.exports = async (fastify, options) => {
     }
   });
 
-  fastify.post("/login", async (request, reply) => {
+  fastify.post("/login", { schema: { hide: true } }, async (request, reply) => {
     const { data, session } = await auth(request.body);
     if (session) {
       setSession(reply, session);
@@ -37,7 +37,7 @@ module.exports = async (fastify, options) => {
     }
   });
 
-  fastify.get("/script.js", async (request, reply) => {
+  fastify.get("/script.js", { schema: { hide: true } }, async (request, reply) => {
     fs.readFile("pluginScript.js", (err, fileBuffer) => {
       reply.send(err || replaceBuffer(fileBuffer, "{siteUrl}", SITE_URL));
     });

@@ -2,7 +2,7 @@ const { parseData } = require('../../dpixivbot/utils/data')
 
 module.exports = async (fastify, options) => {
 
-    fastify.get("/load", async (request, reply) => {
+    fastify.get("/load", { schema: { hide: true } }, async (request, reply) => {
         if (request.query?.data) {
             const data = parseData(request.query.data)
             if (data.id)
@@ -11,7 +11,7 @@ module.exports = async (fastify, options) => {
         return { ok: false }
     });
 
-    fastify.get("/undefined", async (request, reply) => {
+    fastify.get("/undefined", { schema: { hide: true } }, async (request, reply) => {
         return { ok: false }
     });
 };

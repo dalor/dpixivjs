@@ -8,6 +8,7 @@ const querystring = require("querystring");
 
 const requestOptions = (options) => {
   if (!options.method) options.method = DEFAULT_METHOD;
+  else options.method = encodeURI(options.method)
   if (!options.hostname) options.hostname = DEFAULT_HOSTNAME;
   if (!options.headers) options.headers = {};
   Object.assign(options.headers, {
@@ -102,6 +103,7 @@ exports.shortGroupInfo = ({ ids, session }) =>
         query: {
           mode: "get_illust_detail_by_ids",
           illust_ids: ids.join(","),
+          lang: 'en'
         },
         pixSession: session,
       },
@@ -231,6 +233,34 @@ exports.userExtra = ({ session }) =>
       toJson((json) => {
         if (!json.error) {
           resolve(json.body)
+        } else reject();
+      })
+    )
+  );
+
+exports.search = ({ word, order, mode, page, s_mode, type }) =>
+  new Promise((resolve, reject) =>
+    request(
+      {
+        path: `/ajax/search/artworks/${word}`,
+        query: {
+          word,
+          order: order || 'date_d',
+          mode: mode || 'all',
+          p: page || 1,
+          s_mode: s_mode || 's_tag_full',
+          type: type || 'all',
+          lang: 'en'
+        }
+      },
+      toJson((json) => {
+        if (!json.error) {
+          const ids = json.body.illustManga.data.map(({ id }) => id)
+          resolve({
+            ids,
+            length: ids.length,
+            page: parseInt(page)
+          })
         } else reject();
       })
     )
