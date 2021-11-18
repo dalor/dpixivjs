@@ -86,7 +86,7 @@ const showErrors = (errors) => {
     }
 }
 
-const getLoginButton = () => document.getElementsByClassName('signup-form__submit')[1];
+const getLoginButton = () => document.getElementsByClassName('signup-form__submit')[0];
 
 const putNewBlock = (loginButton, NewButton) => {
     loginButton.parentNode.insertBefore(NewButton, loginButton);
