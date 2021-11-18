@@ -161,19 +161,23 @@ exports.following = ({ page, session }) =>
   new Promise((resolve, reject) =>
     request(
       {
-        path: "/bookmark_new_illust.php",
+        path: '/ajax/follow_latest/illust',
         query: {
           p: page,
+          mode: 'all',
+          lang: 'en'
         },
         pixSession: session,
       },
-      loadPage((page_) => {
-        const match = page_.match(/data\-items\=\"([^"]+)/);
-        if (match) {
-          const ids = JSON.parse(match[1].replace(/&quot;/g, '"')).map((pic) =>
-            parseInt(pic.illustId)
-          );
-          resolve({ ids: ids, length: ids.length, page: parseInt(page) });
+      toJson((json) => {
+        if (!json.error) {
+          resolve(
+            {
+              ids: json.body.page.ids,
+              length: json.body.page.ids.length,
+              page: parseInt(page)
+            }
+          )
         } else reject();
       })
     )
