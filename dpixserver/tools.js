@@ -24,7 +24,7 @@ exports.pipeFixedUrlToReply = (url, reply) => {
         .fileName;
       reply.raw.writeHead(200, {
         "Content-Type": resp.headers["content-type"],
-        "Content-disposition": "attachment; filename=" + fileName,
+        "Content-disposition": `attachment; filename=${fileName}`,
       });
       resp.pipe(reply.raw);
       reply.sent = true;

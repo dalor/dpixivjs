@@ -1,24 +1,26 @@
 const { pipeFixedUrlToReply } = require("../tools");
 
 module.exports = async (fastify, options) => {
-  fastify.get("/fix",
+  fastify.get(
+    "/fix",
     {
       schema: {
         query: {
-          type: 'object',
+          type: "object",
           properties: {
             url: {
-              type: 'string'
-            }
-          }
-        }
-      }
+              type: "string",
+            },
+          },
+        },
+      },
     },
     async (request, reply) => {
       if (request.query?.url) {
-        pipeFixedUrlToReply(request.query.url, reply);
+        return pipeFixedUrlToReply(request.query.url, reply);
       } else {
         return { ok: false };
       }
-    });
+    }
+  );
 };
