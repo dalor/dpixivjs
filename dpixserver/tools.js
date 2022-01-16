@@ -19,8 +19,16 @@ exports.getSession = (request) => ({ session: request.headers.token });
 
 exports.pipeFixedUrlToReply = (url, reply) => {
   try {
-    pipeFixedUrl(url, reply.raw);
-    reply.sent = true;
+    pipeFixedUrl(url, (resp) => {
+      const fileName = url.match(/(?<fileName>[^\/]+\.[^\.]+)$/)?.groups
+        .fileName;
+      reply.raw.writeHead(200, {
+        "Content-Type": resp.headers["content-type"],
+        "Content-disposition": "attachment; filename=" + fileName,
+      });
+      resp.pipe(reply.raw);
+      reply.sent = true;
+    });
   } catch {
     return { ok: false };
   }

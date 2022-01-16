@@ -4,13 +4,15 @@ const RedisSession = require("telegraf-session-redis");
 const TelegrafI18n = require("telegraf-i18n");
 
 module.exports = (bot) => {
-  const session = new RedisSession({
-    store: {
-      url: config.REDIS_URL,
-    },
-  });
+  if (config.REDIS_URL) {
+    const session = new RedisSession({
+      store: {
+        url: config.REDIS_URL,
+      },
+    });
 
-  bot.use(session);
+    bot.use(session);
+  }
 
   bot.telegram.getMe().then((botInfo) => (bot.context.botInfo = botInfo));
 
