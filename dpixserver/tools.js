@@ -45,6 +45,7 @@ exports.pipeUgoiraArchiveToGifReply = (ugoiraUrl, delay, reply) => {
       "Content-disposition": `attachment; filename=${fileName}.gif`,
     });
     ffmpeg()
+      .setFfmpegPath('ffmpeg')
       .input(resp)
       .outputOptions(`-r ${1000 / delay}`)
       .complexFilter('[0:v] fps=24,split [a][b];[a] palettegen=stats_mode=single [p];[b][p] paletteuse=new=1')
