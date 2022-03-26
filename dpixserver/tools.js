@@ -1,3 +1,5 @@
+const ffmpeg = require('fluent-ffmpeg');
+
 const { pipeFixedUrl } = require("../api");
 
 exports.apiDecorator = (func, patch) => async (request, reply) => {
@@ -32,4 +34,24 @@ exports.pipeFixedUrlToReply = (url, reply) => {
   } catch {
     return { ok: false };
   }
+};
+
+exports.pipeUgoiraArchiveToGifReply = (ugoiraUrl, delay, reply) => {
+  pipeFixedUrl(ugoiraUrl, (resp) => {
+    const fileName = ugoiraUrl.match(/(?<fileName>[^\/]+)\.[^\.]+$/)?.groups
+      .fileName;
+    reply.raw.writeHead(200, {
+      "Content-Type": resp.headers["content-type"],
+      "Content-disposition": `attachment; filename=${fileName}.gif`,
+    });
+    ffmpeg()
+      .setFfmpegPath('./ffmpeg')
+      .input(resp)
+      .outputOptions(`-r ${1000 / delay}`)
+      .complexFilter('[0:v] fps=24,split [a][b];[a] palettegen=stats_mode=single [p];[b][p] paletteuse=new=1')
+      .format('gif')
+      .output(reply.raw)
+      .run()
+    reply.sent = true;
+  });
 };

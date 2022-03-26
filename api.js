@@ -113,13 +113,14 @@ exports.shortGroupInfo = ({ ids, session }) =>
               id: pic.illust_id,
               illustId: pic.illust_id,
               illustTitle: pic.illust_title,
+              illustType: parseInt(pic.illust_type),
               pageCount: parseInt(pic.illust_page_count),
               urls: pic.url
                 ? {
-                    original: pic.url.big,
-                    medium: pic.url.m,
-                    smaller: pic.url["240mw"],
-                  }
+                  original: pic.url.big,
+                  medium: pic.url.m,
+                  smaller: pic.url["240mw"],
+                }
                 : undefined,
             }))
             .sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
@@ -281,6 +282,24 @@ exports.search = ({ word, order, mode, page, s_mode, type }) =>
             ids,
             length: ids.length,
             page: parseInt(page),
+          });
+        } else reject();
+      })
+    )
+  );
+
+exports.ugoiraMeta = ({ id }) =>
+  new Promise((resolve, reject) =>
+    request(
+      {
+        path: `/ajax/illust/${id}/ugoira_meta`,
+      },
+      toJson((json) => {
+        if (!json.error) {
+          resolve({
+            averageDelay: json.body.frames.map(({ delay }) => delay).reduce((sum, d) => sum + d, 0) / json.body.frames.length,
+            medium: json.body.src,
+            original: json.body.originalSrc
           });
         } else reject();
       })

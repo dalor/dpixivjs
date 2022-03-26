@@ -1,13 +1,17 @@
+const { BOT_TOKEN } = require('./config')
+
 const fastify = require("fastify")({
     // logger: true
 });
 
-const bot = require('./dpixivbot')
+if (BOT_TOKEN) {
+    const bot = require('./dpixivbot')
 
-fastify.post('/' + bot.token, async request => {
-    await bot.handleUpdate(request.body)
-    return { ok: true }
-})
+    fastify.post('/' + bot.token, async request => {
+        await bot.handleUpdate(request.body)
+        return { ok: true }
+    })
+}
 
 fastify.register(require("./dpixserver"));
 

@@ -23,3 +23,5 @@ export const botAuth = (session) => `https://t.me/dpixivbot?start=session_${sess
 export const userInfo = `${API}/user/info`;
 
 export const userExtra = `${API}/user/extra`;
+
+export const ugoiraUrl = id => `${API}/pic/${id}/ugoira`;

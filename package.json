@@ -12,6 +12,7 @@
     "fastify-static": "^3.3.0",
     "fastify-swagger": "^4.8.4",
     "fastify-telegraf": "^1.0.2",
+    "fluent-ffmpeg": "^2.1.2",
     "js-cookie": "^2.2.1",
     "node-fetch": "^2.6.1",
     "pngjs": "^6.0.0",

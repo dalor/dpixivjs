@@ -1,6 +1,6 @@
-const { apiDecorator, getSession, pipeFixedUrlToReply } = require("../tools");
+const { apiDecorator, getSession, pipeFixedUrlToReply, pipeUgoiraArchiveToGifReply } = require("../tools");
 
-const { info, similar, recommender } = require("../../api");
+const { info, similar, recommender, ugoiraMeta } = require("../../api");
 
 const { DEFAULT_PREVIEW_PIC_URL } = require("../../config");
 
@@ -98,13 +98,27 @@ module.exports = async (fastify, options, done) => {
 
   fastify.get("/:id/preview", { schema: { hide: true } }, async ({ params }, reply) => {
     try {
-      await info({
+      return await info({
         id: params.id,
       }).then(
         ({ urls }) => urls?.regular && pipeFixedUrlToReply(urls.regular, reply)
       );
     } catch {
-      pipeFixedUrlToReply(DEFAULT_PREVIEW_PIC_URL, reply);
+      return pipeFixedUrlToReply(DEFAULT_PREVIEW_PIC_URL, reply);
+    }
+  });
+
+  fastify.get("/:id/ugoira", { schema: { hide: true } }, async ({ params }, reply) => {
+    try {
+      await ugoiraMeta({
+        id: params.id,
+      }).then(
+        ({ original, averageDelay }) => {
+          return pipeUgoiraArchiveToGifReply(original, averageDelay, reply)
+        }
+      );
+    } catch {
+      return pipeFixedUrlToReply(DEFAULT_PREVIEW_PIC_URL, reply);
     }
   });
 
