@@ -7,7 +7,7 @@ module.exports = (data, ctx) =>
       [
         [
           markup.callbackButton(ctx.t("prev"), "prev", data.pageCount <= 1),
-          markup.callbackButton(ctx.t("ugoira"), "ugoira", data.pageCount <= 1),
+          markup.callbackButton(ctx.t("ugoira"), "ugoira", !data.ugoira || data.ugoiraActive),
           markup.callbackButton(ctx.t("next"), "next", data.pageCount <= 1),
         ],
         [

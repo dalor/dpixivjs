@@ -32,7 +32,7 @@ module.exports = ({ bot }) => {
               id: data.id,
               session: ctx.session.session || config.DEFAULT_SESSION
             }).then(({ averageDelay, original }) => {
-              return ctx.replyWithDocument(`${UGOIRA_LOAD_URL}?url=${original}&delay=${averageDelay}`, {
+              return ctx.replyWithDocument(`${UGOIRA_LOAD_URL}?url=${original}&delay=${averageDelay}&type=mp4`, {
                 reply_to_message_id: ctx.callbackQuery.message.message_id,
               })
             })
