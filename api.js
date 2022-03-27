@@ -300,7 +300,7 @@ exports.ugoiraMeta = ({ id, session }) =>
       toJson((json) => {
         if (!json.error) {
           resolve({
-            averageDelay: json.body.frames.map(({ delay }) => delay).reduce((sum, d) => sum + d, 0) / json.body.frames.length,
+            averageDelay: Math.trunc(json.body.frames.map(({ delay }) => delay).reduce((sum, d) => sum + d, 0) / json.body.frames.length),
             medium: json.body.src,
             original: json.body.originalSrc
           });
