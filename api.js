@@ -30,6 +30,7 @@ const getSession = (cookies) =>
 
 const request = (options, callback, data) => {
   const req = https.request(requestOptions(options), callback);
+  req.on('error', console.error)
   if (data) {
     req.write(data);
   }
@@ -288,11 +289,13 @@ exports.search = ({ word, order, mode, page, s_mode, type }) =>
     )
   );
 
-exports.ugoiraMeta = ({ id }) =>
+exports.ugoiraMeta = ({ id, session }) =>
   new Promise((resolve, reject) =>
     request(
       {
         path: `/ajax/illust/${id}/ugoira_meta`,
+        query: { lang: 'en' },
+        pixSession: session,
       },
       toJson((json) => {
         if (!json.error) {

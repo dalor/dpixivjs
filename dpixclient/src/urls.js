@@ -1,12 +1,12 @@
 const API = "";
 
-const FIX_URL = API + "/fix?url=";
-
 export const url = API
 
 export const info = id => `${API}/pic/${id}/info`;
 
-export const fix = url => FIX_URL + url;
+export const fix = url => `${API}/fix?url=${url}`;
+
+export const fixUgoira = (url, delay) => `${API}/fixUgoira?url=${url}&delay=${delay}`;
 
 export const similar = id => `${API}/pic/${id}/similar`;
 
@@ -24,4 +24,4 @@ export const userInfo = `${API}/user/info`;
 
 export const userExtra = `${API}/user/extra`;
 
-export const ugoiraUrl = id => `${API}/pic/${id}/ugoira`;
+export const ugoira = id => `${API}/pic/${id}/ugoira`;

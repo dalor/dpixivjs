@@ -1,4 +1,4 @@
-import { info, similar, shortGroupInfo, recomendation, following, discovery } from "../urls";
+import { info, similar, shortGroupInfo, recomendation, following, discovery, ugoira } from "../urls";
 
 export const infoFetch = (id) => fetch(info(id))
     .then(res => res.json())
@@ -43,5 +43,13 @@ export const discoveryFetch = (token) => fetch(discovery,
     })
     .then(res => res.json())
     .then(res => res.data?.ids || null)
+    .catch(() => null)
+
+export const ugoiraFetch = (id, token) => fetch(ugoira(id),
+    {
+        headers: { Token: token },
+    })
+    .then(res => res.json())
+    .then(res => res.data || null)
     .catch(() => null)
 

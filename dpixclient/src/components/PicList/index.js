@@ -1,7 +1,8 @@
 import React, { useState, useRef } from "react";
-import { fix } from "../../urls";
 import PicContent from "../PicContent";
 import "./PicList.css";
+import Ugoira from "../Ugoira";
+import { fix } from "../../urls";
 import { connect } from "react-redux";
 import { defaultSettings } from "../../config";
 
@@ -37,12 +38,19 @@ const SmallPic = ({ pic, loadMore, quality }) => {
           {pic.pageCount > 1 && pic.urls && (
             <div className="small-page-count">{pic.pageCount}</div>
           )}
-          <img
-            src={fix(pic.urls[quality])}
+          {pic.illustType === 2 ? <Ugoira
+            illustId={pic.illustId}
+            illustTitle={pic.illustTitle}
             onClick={() => setFullPic(true)}
             onLoad={() => setLoaded(true)}
-            alt={pic.illustTitle}
-          />
+          /> :
+            <img
+              src={fix(pic.urls[quality])}
+              onClick={() => setFullPic(true)}
+              onLoad={() => setLoaded(true)}
+              alt={pic.illustTitle}
+            />
+          }
           {/* <div
             className="more-button"
             onClick={e => {

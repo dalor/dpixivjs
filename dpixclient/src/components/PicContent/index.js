@@ -1,16 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./PicContent.css";
+import Ugoira from "../Ugoira";
 import { fix, ugoiraUrl } from "../../urls";
 import { connect } from "react-redux";
 import { defaultSettings, qualityConverter } from "../../config";
 
 const MainPics = ({ pic, onClick, quality }) => {
   if (pic.illustType === 2) {
-    return (<img
-      src={ugoiraUrl(pic.illustId)}
+    return (<Ugoira
+      illustId={pic.illustId}
+      illustTitle={pic.illustTitle}
       onClick={onClick}
-      alt={pic.illustTitle}
     />)
   } else {
     const url = pic.urls[quality] || pic.urls[qualityConverter[quality]];
