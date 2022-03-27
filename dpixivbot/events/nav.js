@@ -30,12 +30,12 @@ module.exports = ({ bot }) => {
       return ugoiraMeta({
         id: data.id,
         session: ctx.session.session || config.DEFAULT_SESSION
-      }).then(({ averageDelay, medium }) => {
+      }).then(({ averageDelay, original }) => {
         return update(ctx, Object.assign(data, {
           ugoiraActive: true
         }), {
           changeMedia: true,
-          ugoira: `${UGOIRA_LOAD_URL}?url=${medium}&delay=${averageDelay}&type=mp4`
+          ugoira: `${UGOIRA_LOAD_URL}?url=${original}&delay=${averageDelay}&type=mp4`
         });
       })
     })
