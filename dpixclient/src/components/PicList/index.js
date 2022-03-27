@@ -43,6 +43,7 @@ const SmallPic = ({ pic, loadMore, quality }) => {
             illustTitle={pic.illustTitle}
             onClick={() => setFullPic(true)}
             onLoad={() => setLoaded(true)}
+            quality={quality}
           /> :
             <img
               src={fix(pic.urls[quality])}

@@ -96,7 +96,8 @@ exports.pipeUgoiraArchiveToMP4 = (ugoiraUrl, delay, reply) => {
         .outputOptions([
           '-c:v libx264',
           '-vf fps=24',
-          '-pix_fmt yuv420p'
+          '-pix_fmt yuv420p',
+          '-movflags frag_keyframe+empty_moov'
         ])
         .output(reply.raw)
 
