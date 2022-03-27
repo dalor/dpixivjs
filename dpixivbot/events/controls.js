@@ -1,4 +1,6 @@
 const { loadData } = require("../utils/data");
+const { ugoiraMeta } = require("../../api");
+const { UGOIRA_LOAD_URL } = require("../../config");
 const update = require("../utils/update");
 const { sendFull } = require("../utils/send");
 
@@ -24,10 +26,22 @@ module.exports = ({ bot }) => {
     loadData((ctx, data) => {
       return ctx
         .answerCbQuery(ctx.t("loading"))
-        .then(() =>
-          ctx.replyWithDocument(data.url, {
-            reply_to_message_id: ctx.callbackQuery.message.message_id,
-          })
+        .then(() => {
+          if (data.ugoira) {
+            return ugoiraMeta({
+              id: data.id,
+              session: ctx.session.session || config.DEFAULT_SESSION
+            }).then(({ averageDelay, original }) => {
+              return ctx.replyWithDocument(`${UGOIRA_LOAD_URL}?url=${original}&delay=${averageDelay}`, {
+                reply_to_message_id: ctx.callbackQuery.message.message_id,
+              })
+            })
+          } else {
+            return ctx.replyWithDocument(data.url, {
+              reply_to_message_id: ctx.callbackQuery.message.message_id,
+            })
+          }
+        }
         );
     })
   );

@@ -7,6 +7,7 @@ module.exports = (data, ctx) =>
       [
         [
           markup.callbackButton(ctx.t("prev"), "prev", data.pageCount <= 1),
+          markup.callbackButton(ctx.t("ugoira"), "ugoira", data.pageCount <= 1),
           markup.callbackButton(ctx.t("next"), "next", data.pageCount <= 1),
         ],
         [
@@ -47,10 +48,10 @@ module.exports = (data, ctx) =>
         (data.show &&
           data.choosed == "similar" &&
           similarMenu(data, markup, ctx)) ||
-          (data.show &&
-            data.choosed == "sender" &&
-            senderMenu(data, markup, ctx)) ||
-          []
+        (data.show &&
+          data.choosed == "sender" &&
+          senderMenu(data, markup, ctx)) ||
+        []
       )
     )
   ).reply_markup;
@@ -82,7 +83,7 @@ const senderMenu = (data, markup, ctx) =>
   [[markup.callbackButton(ctx.t("back_btn"), "back")]].concat(
     ctx.session.channels
       ? ctx.session.channels.map((channel) => [
-          markup.callbackButton(channel.title, `sendToChannel ${channel.id}`),
-        ])
+        markup.callbackButton(channel.title, `sendToChannel ${channel.id}`),
+      ])
       : []
   );

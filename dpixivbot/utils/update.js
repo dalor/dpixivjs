@@ -3,7 +3,7 @@ const { updatePic, updateText } = require("../views/pic");
 const { changePage } = require("./fixes");
 const { PIC_LOAD_URL } = require("../../config");
 
-module.exports = (ctx, data, { changeMedia } = {}) => {
+module.exports = (ctx, data, { changeMedia, ugoira } = {}) => {
   if (ctx.entity) {
     ctx.entity.url = dataUrl(data, PIC_LOAD_URL);
     if (ctx.callbackQuery.message.text) {
@@ -35,8 +35,8 @@ module.exports = (ctx, data, { changeMedia } = {}) => {
       if (changeMedia) {
         return ctx.editMessageMedia(
           {
-            type: "photo",
-            media: photo,
+            type: ugoira ? "animation" : "photo",
+            media: ugoira || photo,
             caption: caption,
           },
           { reply_markup, parse_mode: "HTML" }

@@ -1,4 +1,6 @@
 const { loadData } = require("../utils/data");
+const { ugoiraMeta } = require("../../api");
+const { UGOIRA_LOAD_URL } = require("../../config");
 const update = require("../utils/update");
 const { originalToRegular } = require("../utils/fixes");
 
@@ -23,6 +25,21 @@ module.exports = ({ bot }) => {
   );
 
   bot.action(
+    "ugoira",
+    loadData((ctx, data) => {
+      return ugoiraMeta({
+        id: data.id,
+        session: ctx.session.session || config.DEFAULT_SESSION
+      }).then(({ averageDelay, medium }) => {
+        return update(ctx, data, {
+          changeMedia: true,
+          ugoira: `${UGOIRA_LOAD_URL}?url=${medium}&delay=${averageDelay}`
+        });
+      })
+    })
+  );
+
+  bot.action(
     "preload",
     loadData((ctx, data) => {
       if (data.pageCount > 1) {
@@ -39,7 +56,7 @@ module.exports = ({ bot }) => {
                 media: url,
                 parse_mode: "HTML",
               })
-              .catch(() => {})
+              .catch(() => { })
           )
         ).finally(() =>
           setTimeout(() => update(ctx, data, { changeMedia: true }), 500)

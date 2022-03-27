@@ -14,10 +14,10 @@ exports.sendPics = (ctx, ids, data) =>
   }).then((pics) =>
     data?.group
       ? Promise.all(
-          splitToPacks(pics, data?.size || PACK_SIZE).map((pack) =>
-            sendPack(ctx, pack, data)
-          )
+        splitToPacks(pics, data?.size || PACK_SIZE).map((pack) =>
+          sendPack(ctx, pack, data)
         )
+      )
       : sendPackByOne(ctx, pics, data)
   );
 
@@ -43,7 +43,7 @@ exports.sendFull = (ctx, id, data) =>
           })),
           { reply_to_message_id: data && data.reply }
         );
-      } catch {}
+      } catch { }
     }
   });
 
@@ -56,6 +56,7 @@ const picCtx = (ctx, pic, page, no_reply_markup, no_page) =>
       pageCount: pic.pageCount,
       url: pic.urls.original,
       id: pic.id,
+      ugoira: pic.illustType === 2,
       description:
         ctx.session.description !== undefined
           ? ctx.session.description

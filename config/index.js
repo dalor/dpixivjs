@@ -1,6 +1,7 @@
 module.exports = {
   BOT_TOKEN: process.env.BOT_TOKEN,
   PIC_LOAD_URL: process.env.SITE_URL + "/load",
+  UGOIRA_LOAD_URL: process.env.SITE_URL + "/fixUgoira",
   PIXIV_PIC_URL: process.env.PIXIV_PIC_URL,
   LANGS: [
     { key: "en", text: "🇬🇧 English" },
