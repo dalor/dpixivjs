@@ -120,7 +120,7 @@ exports.shortGroupInfo = ({ ids, session }) =>
                 ? {
                   original: pic.url.big,
                   medium: pic.url.m,
-                  smaller: pic.url["240mw"],
+                  smaller: pic.url["240mw"] || pic.url.m,
                 }
                 : undefined,
             }))
@@ -302,7 +302,8 @@ exports.ugoiraMeta = ({ id, session }) =>
           resolve({
             averageDelay: Math.trunc(json.body.frames.map(({ delay }) => delay).reduce((sum, d) => sum + d, 0) / json.body.frames.length),
             medium: json.body.src,
-            original: json.body.originalSrc
+            original: json.body.originalSrc,
+            smaller: json.body.src
           });
         } else reject();
       })
