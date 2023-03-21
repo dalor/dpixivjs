@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Redirect, useParams } from "react-router-dom";
 import { connect } from "react-redux";
-import { userInfoFetch } from "../services/user";
+import { userInfoFetch, userExtraFetch } from "../services/user";
 import Loading from "./Loading";
 
 const SetSession = connect(null, (dispatch) => ({
@@ -16,9 +16,8 @@ const SetSession = connect(null, (dispatch) => ({
   const { session } = useParams();
 
   const loadUser = () =>
-    userInfoFetch(session).then((user) => {
+    userExtraFetch(session).then((user) => {
       if (user) {
-        console.log(user.name);
         setData({
           token: session,
           user,

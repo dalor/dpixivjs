@@ -16,24 +16,22 @@ import { discovery, following, settings } from "../navs";
 import { connect } from "react-redux";
 
 const RouterPage = connect((data) => ({ user: data.user }))(({ user }) => {
-  const active = user?.id;
-
   return (
     <Router>
       <Switch>
-        {active && (
+        {user && (
           <Route path={discovery}>
             <MenuButton />
             <Discovery />
           </Route>
         )}
-        {active && (
+        {user && (
           <Route path={following}>
             <MenuButton />
             <Following />
           </Route>
         )}
-        {active && (
+        {user && (
           <Route path={settings}>
             <MenuButton />
             <Settings />
@@ -46,7 +44,7 @@ const RouterPage = connect((data) => ({ user: data.user }))(({ user }) => {
           <SetSession />
         </Route>
         <Route path="/:id">
-          {active && <MenuButton />}
+          {user && <MenuButton />}
           <Pic />
         </Route>
         <Route path="/">

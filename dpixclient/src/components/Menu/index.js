@@ -34,7 +34,7 @@ const Menu = connect((data) => ({ token: data.token, user: data.user }))(
     return (
       <MenuWrapper width="600px" height="560px">
         <div className="menu-user-info">
-          <div className="user-nickname">{user.name}</div>
+          <div className="user-nickname">Menu</div>
           <div className="user-followings">Following: {user.following}</div>
         </div>
         <div className="menu-buttons">

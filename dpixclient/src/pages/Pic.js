@@ -28,7 +28,7 @@ const PicPage = connect((data) => ({ user: data.user }))(({ user }) => {
       {id === oldId ? (
         <>
           <Pic id={oldId} />
-          {user?.id && (
+          {user && (
             <SimilarPics id={oldId} onBottomDecorator={rad.decorator} />
           )}
         </>

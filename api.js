@@ -99,9 +99,8 @@ exports.shortGroupInfo = ({ ids, session }) =>
   new Promise((resolve, reject) =>
     request(
       {
-        path: `/rpc/index.php`,
+        path: `/ajax/illust/detail`,
         query: {
-          mode: "get_illust_detail_by_ids",
           illust_ids: ids.join(","),
           lang: "en",
         },
@@ -189,7 +188,7 @@ const login = ({ session, ...loginData }) =>
       {
         method: "POST",
         hostname: "accounts.pixiv.net",
-        path: "/api/login",
+        path: "/ajax/login",
         query: {
           lang: "en",
         },

@@ -9,25 +9,28 @@ const loadSession = () => {
     window.localStorage.getItem(sessionKey);
 }
 
+const getInitConfig = () => JSON.parse(document.getElementById('init-config').value)
+
 const getToken = (callback) => {
     return grecaptcha.enterprise.ready(() => {
-        grecaptcha.enterprise.execute(0, { action: 'accounts/login' }).then(callback)
+        const pixivInitConfig = getInitConfig()
+        grecaptcha.enterprise.execute(pixivInitConfig['pixivAccount.recaptchaEnterpriseScoreSiteKey'], { action: 'accounts/login' }).then(callback)
     })
 }
 
 const getFormData = () => {
-    const form = new FormData(document.forms[0]);
+    const form = new FormData(formBlock);
     const data = Object.fromEntries(form);
-    const loginComponent = document.getElementById('LoginComponent');
-    const inputs = loginComponent.getElementsByTagName('input');
+    const inputs = formBlock.getElementsByTagName('input');
     return Object.assign(data, {
-        pixiv_id: inputs[0]?.value,
-        password: inputs[1]?.value
+        login_id: inputs[1]?.value,
+        password: inputs[2]?.value
     })
 }
 
 const buttonEvent = (e) => getToken(recaptcha_enterprise_score_token => {
     const data = Object.assign(getFormData(), { recaptcha_enterprise_score_token });
+    console.log(data)
     showErrors(['Loading...'])
     fetch(siteUrl + "/login", {
         method: "POST",
@@ -58,10 +61,10 @@ const buttonEvent = (e) => getToken(recaptcha_enterprise_score_token => {
 
 const createNewButton = () => {
     const dpixivButton = document.createElement('button');
-    dpixivButton.className = 'signup-form__submit';
+    dpixivButton.className = loginButton.className;
     dpixivButton.innerHTML = 'Login to dpixiv';
     dpixivButton.type = 'button';
-    dpixivButton.style.cssText = 'margin-bottom: 8px; margin-top: 9px;'
+    dpixivButton.style.cssText = 'margin-bottom: -10px; margin-top: 8px;'
     dpixivButton.addEventListener('click', buttonEvent)
     return dpixivButton
 }
@@ -86,19 +89,22 @@ const showErrors = (errors) => {
     }
 }
 
-const getLoginButton = () => document.getElementsByClassName('signup-form__submit')[0];
+const getLoginButton = () => formBlock.getElementsByTagName('button')[0];
 
 const putNewBlock = (loginButton, NewButton) => {
     loginButton.parentNode.insertBefore(NewButton, loginButton);
 }
 
-const newButton = createNewButton()
+const formBlock = document.forms[0]
 
 const errorBlock = createErrorBlock()
 
 const loginButton = getLoginButton()
 
+const newButton = createNewButton()
+
 if (loginButton) {
+
     putNewBlock(loginButton, errorBlock)
     putNewBlock(loginButton, newButton)
 }

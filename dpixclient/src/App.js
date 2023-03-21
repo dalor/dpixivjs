@@ -6,8 +6,7 @@ import { userInfoFetch, userExtraFetch } from "./services/user"
 
 export default connect(
   (data) => ({
-    token: data.token,
-    user: data.user
+    token: data.token
   }),
   (dispatch) => ({
     setUser: (user) => dispatch({
@@ -16,28 +15,14 @@ export default connect(
     })
   })
 )(
-  ({ token, user, setUser }) => {
-
-    const [newUser, setNewUser] = useState(null)
-
-    const loadUser = () =>
-      Promise.all([userInfoFetch(token), userExtraFetch(token)])
-        .then(([first, second]) => setNewUser(Object.assign({}, first || {}, second || {})))
+  ({ token, setUser }) => {
 
     useEffect(
       () => {
         if (token)
-          loadUser()
+          userExtraFetch(token).then(setUser).catch(() => setUser(null))
       }, [token]
     )
-
-    if (user && newUser) {
-      if (user.id === newUser.id) {
-        setTimeout(() => setUser(newUser)) // setTimeout go brrrrr
-      } else {
-        loadUser()
-      }
-    }
 
     return (
       <main>
