@@ -1,6 +1,9 @@
 import { info, similar, shortGroupInfo, recomendation, following, discovery, ugoira } from "../urls";
 
-export const infoFetch = (id) => fetch(info(id))
+export const infoFetch = (id, token) => fetch(info(id),
+    {
+        headers: { Token: token },
+    })
     .then(res => res.json())
     .then(res => res.data || null)
     .catch(() => null)

@@ -59,11 +59,12 @@ exports.pipeFixedUrl = (url, respCallback) => {
   https.get(request_, respCallback);
 };
 
-exports.info = ({ id }) =>
+exports.info = ({ id, session }) =>
   new Promise((resolve, reject) =>
     request(
       {
         path: `/ajax/illust/${id}`,
+        pixSession: session
       },
       toJson((json) => {
         if (!json.error) resolve(json.body);
