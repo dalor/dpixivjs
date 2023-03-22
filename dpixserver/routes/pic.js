@@ -19,15 +19,19 @@ module.exports = async (fastify, options, done) => {
             }
           }
         },
+        headers: headersTokenScheme,
         response: responseScheme()
       }
     },
-    apiDecorator(async ({ params }) => ({
+    apiDecorator(async ({ params, session }) => ({
       ok: true,
       data: await info({
         id: params.id,
+        session
       }),
-    }))
+    }),
+      getSession
+    )
   );
 
   fastify.get(
